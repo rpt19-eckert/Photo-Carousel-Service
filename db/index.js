@@ -2,7 +2,7 @@ const mysql = require('mysql');
 
 const db = mysql.createConnection({
   user: 'root',
-  password: '',
+  password: 'helloworld',
   database: 'photo_gallery',
 });
 
@@ -17,6 +17,46 @@ const getMainRouteString = (id) => {
     });
   });
 };
+//insert new set of Data into db
+
+const insertDataSet = (data) => {
+  return new Promise((resolve, reject) => {
+    let select_query_name = `INSERT INTO Photos SET ?`;
+    db.query(select_query_name, data, (err, results) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(results);
+    });
+  });
+}
+
+//Delete set of Data where id is...
+
+const deleteDataSet = (id) => {
+  return new Promise ((resolve, reject) => {
+    let select_query_name = `DELETE FROM Photos WHERE ID = ${id}`;
+    db.query(select_query_name, (err, results) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(results);
+    })
+  })
+}
+
+//update data set
+const updateDataSet = (id, item, newData) => {
+  return new Promise((resolve, reject) => {
+    let select_query_num = `UPDATE Photos SET ${item} = ${newData}WHERE listing_id=${id}`;
+    db.query(select_query_num, (err, results) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(results);
+    });
+  })
+}
 
 const getMainRouteNum = (id) => {
   return new Promise((resolve, reject) => {
@@ -60,5 +100,8 @@ module.exports = {
   getMainRouteString,
   getMainRouteNum,
   toggleFavorite,
-  recPhotos
+  recPhotos,
+  insertDataSet,
+  deleteDataSet,
+  updateDataSet
 };
