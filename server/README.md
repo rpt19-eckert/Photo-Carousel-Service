@@ -1,99 +1,19 @@
 # CRUD API
 
-## DELETE    */deleteSet*
-#### Delete a set of data from Photos Table
-Parameter:
-`listingId - number`
+## Table of Contents
 
-`req.body = {
- listingId: 10012,
-}`
-###### Response Sample
-`{
-    "fieldCount": 0,
-    "affectedRows": 0,
-    "insertId": 0,
-    "serverStatus": 2,
-    "warningCount": 0,
-    "message": "",
-    "protocol41": true,
-    "changedRows": 0
-}`
-
-## GET  */:id/rec-photos*
-#### Get a set of photos according to the given listingId
-Parameter:
-`:id - number`
-
-###### Response Sample
- `{
-    "photo1": "https://fec-photos.s3-us-west-1.amazonaws.com/coverPics/Cover01Small.jpg",
-    "photo2": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic02Small.jpg",
-    "photo3": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic03Small.jpg",
-    "photo4": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic04Small.jpg",
-    "photo5": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic05Small.jpg",
-    "photo6": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic06Small.jpg",
-    "photo7": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic07Small.jpg",
-    "photo8": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic08Small.jpg",
-    "photo9": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic09Small.jpg",
-    "photo10": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic10Small.jpg",
-    "photo11": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic11Small.jpg",
-    "photo12": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic12Small.jpg",
-    "photo13": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic13Small.jpg",
-    "photo14": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic14Small.jpg",
-    "photo15": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic15Small.jpg",
-    "photo16": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic16Small.jpg",
-    "photo17": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic17Small.jpg",
-    "photo18": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic18Small.jpg",
-    "photo19": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic19Small.jpg",
-    "photo20": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic20Small.jpg",
-    "photo21": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic21Small.jpg",
-    "photo22": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic22Small.jpg",
-    "photo23": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic23Small.jpg",
-    "photo24": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic24Small.jpg",
-    "photo25": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic25Small.jpg",
-    "photo26": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic26Small.jpg",
-    "photo27": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic27Small.jpg",
-    "photo28": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic28Small.jpg",
-    "photo29": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic29Small.jpg",
-    "photo30": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic30Small.jpg"
-}`
+1. [GET](#GET)
+1. [POST](#POST)
+1. [PUT](#PUT)
+1. [DELETE](#DELETE)
 
 
-## POST    */postListingSet*
-#### Add new set of listing data to database
 
-## PUT    */updatePhotoFromId*
-#### Updates a photo url from given listingId
-parameters:
-`listingId - number
-            item - string
-            photoUrl - string`
-
-`req.body = {
- listingId: 10012,
- item: 'photo6_a',
- photoUrl: 'http//photo.site.com'
-}`
-
-###### Response Sample:
-
-`{
-    "fieldCount": 0,
-    "affectedRows": 1,
-    "insertId": 0,
-    "serverStatus": 34,
-    "warningCount": 0,
-    "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
-    "protocol41": true,
-    "changedRows": 1
-}`
 
 ## GET    */listing-info*
 #### gets the array of data from one data set from the photos table
 
-parameter:
-
+parameters:
 `req.query {
  listingId: 10001
 }`
@@ -198,10 +118,53 @@ parameter:
     updatedAt: null
   }`
 
-  ## POST    */favorite*
+## GET  */:id/rec-photos*
+#### Get a set of photos according to the given listingId
+Parameters:
+`:id - number`
+
+###### Response Sample
+ `{
+    "photo1": "https://fec-photos.s3-us-west-1.amazonaws.com/coverPics/Cover01Small.jpg",
+    "photo2": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic02Small.jpg",
+    "photo3": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic03Small.jpg",
+    "photo4": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic04Small.jpg",
+    "photo5": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic05Small.jpg",
+    "photo6": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic06Small.jpg",
+    "photo7": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic07Small.jpg",
+    "photo8": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic08Small.jpg",
+    "photo9": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic09Small.jpg",
+    "photo10": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic10Small.jpg",
+    "photo11": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic11Small.jpg",
+    "photo12": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic12Small.jpg",
+    "photo13": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic13Small.jpg",
+    "photo14": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic14Small.jpg",
+    "photo15": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic15Small.jpg",
+    "photo16": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic16Small.jpg",
+    "photo17": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic17Small.jpg",
+    "photo18": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic18Small.jpg",
+    "photo19": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic19Small.jpg",
+    "photo20": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic20Small.jpg",
+    "photo21": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic21Small.jpg",
+    "photo22": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic22Small.jpg",
+    "photo23": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic23Small.jpg",
+    "photo24": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic24Small.jpg",
+    "photo25": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic25Small.jpg",
+    "photo26": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic26Small.jpg",
+    "photo27": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic27Small.jpg",
+    "photo28": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic28Small.jpg",
+    "photo29": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic29Small.jpg",
+    "photo30": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic30Small.jpg"
+}`
+
+
+## POST    */postListingSet*
+#### Add new set of listing data to database
+
+## POST    */favorite*
   #### Add or remove listing as favorite
 
-  Parameter:
+  Parameters:
   `listing - number`
 
   `req.body {
@@ -218,6 +181,56 @@ parameter:
     "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
     "protocol41": true,
     "changedRows": 1
+}`
+
+## PUT    */updatePhotoFromId*
+#### Updates a photo url from given listingId
+parameters:
+`listingId - number
+            item - string
+            photoUrl - string`
+
+`req.body = {
+ listingId: 10012,
+ item: 'photo6_a',
+ photoUrl: 'http//photo.site.com'
+}`
+
+###### Response Sample:
+
+`{
+    "fieldCount": 0,
+    "affectedRows": 1,
+    "insertId": 0,
+    "serverStatus": 34,
+    "warningCount": 0,
+    "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
+    "protocol41": true,
+    "changedRows": 1
+}`
+
+
+
+
+
+## DELETE    */deleteSet*
+#### Delete a set of data from Photos Table
+Parameters:
+`listingId - number`
+
+`req.body = {
+ listingId: 10012,
+}`
+###### Response Sample
+`{
+    "fieldCount": 0,
+    "affectedRows": 0,
+    "insertId": 0,
+    "serverStatus": 2,
+    "warningCount": 0,
+    "message": "",
+    "protocol41": true,
+    "changedRows": 0
 }`
 
 
