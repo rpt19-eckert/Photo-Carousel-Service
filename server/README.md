@@ -3,9 +3,9 @@
 ## Table of Contents
 
 1. [GET](#GET-/listing-info)
-1. [POST](#POST-/:id/rec-photos)
-1. [PUT](#PUT)
-1. [DELETE](#DELETE)
+1. [POST](#POST-/postListingSet)
+1. [PUT](#PUT-/updatePhotoFromId)
+1. [DELETE](#DELETE-/deleteSet)
 
 
 
@@ -158,10 +158,10 @@ Parameters:
 }`
 
 
-## POST    */postListingSet*
+## POST */postListingSet*
 #### Add new set of listing data to database
 
-## POST    */favorite*
+## POST */favorite*
   #### Add or remove listing as favorite
 
   Parameters:
@@ -183,7 +183,7 @@ Parameters:
     "changedRows": 1
 }`
 
-## PUT    */updatePhotoFromId*
+## PUT */updatePhotoFromId*
 #### Updates a photo url from given listingId
 parameters:
 `listingId - number
@@ -213,7 +213,7 @@ parameters:
 
 
 
-## DELETE    */deleteSet*
+## DELETE */deleteSet*
 #### Delete a set of data from Photos Table
 Parameters:
 `listingId - number`
