@@ -2,7 +2,8 @@
 
 ## DELETE    /deleteSet
 #### Delete a set of data from Photos Table
-Parameter: listingId - number
+Parameter:
+`listingId - number`
 
 `req.body = {
  listingId: 10012,
@@ -21,7 +22,8 @@ Parameter: listingId - number
 
 ## GET  /:id/rec-photos
 #### Get a set of photos according to the given listingId
-Parameter: :id - number
+Parameter:
+`:id - number`
 
 ###### Response Sample
  `{
@@ -58,14 +60,15 @@ Parameter: :id - number
 }`
 
 
-##POST    /postListingSet
+## POST    /postListingSet
 #### Add new set of listing data to database
 
 ## PUT    /updatePhotoFromId
 #### Updates a photo url from given listingId
-parameters: listingId - number
+parameters:
+`listingId - number
             item - string
-            photoUrl - string
+            photoUrl - string`
 
 `req.body = {
  listingId: 10012,
@@ -90,7 +93,6 @@ parameters: listingId - number
 #### gets the array of data from one data set from the photos table
 
 parameter:
-
 
 `req.query {
  listingId: 10001
@@ -199,15 +201,15 @@ parameter:
   ## POST    /favorite
   #### Add or remove listing as favorite
 
-  Parameter
-  listing - number
+  Parameter:
+  `listing - number`
 
-  req.body {
+  `req.body {
     listing: 10001
-  }
+  }`
 
 ###### Response Sample:
-  {
+  `{
     "fieldCount": 0,
     "affectedRows": 1,
     "insertId": 0,
@@ -216,7 +218,7 @@ parameter:
     "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
     "protocol41": true,
     "changedRows": 1
-}
+}`
 
 
 
