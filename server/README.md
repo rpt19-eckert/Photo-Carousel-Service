@@ -2,8 +2,8 @@
 
 ## Table of Contents
 
-1. [GET](#GET-*/listing-info*)
-1. [POST](#POST-*/:id/rec-photos*)
+1. [GET](#GET-/listing-info)
+1. [POST](#POST-/:id/rec-photos)
 1. [PUT](#PUT)
 1. [DELETE](#DELETE)
 
