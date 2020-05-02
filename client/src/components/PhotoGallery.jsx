@@ -32,8 +32,8 @@ class PhotoGallery extends React.Component {
     e.preventDefault();
     let data = {listingId: this.props.state.currentListing.listing_id};
     $.ajax({
-      method: 'POST',
-      url: 'http://ec2-54-183-138-229.us-west-1.compute.amazonaws.com:3002/favorite',
+      method: 'PATCH',
+      url: 'http://localhost:3002/favorite',
       data: data,
       success: (result) => {
         console.log('successful fav save', result);

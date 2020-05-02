@@ -5,6 +5,7 @@
 1. [GET](#GET)
 1. [POST](#POST)
 1. [PUT](#PUT)
+1. [PATCH](#PATCH)
 1. [DELETE](#DELETE)
 
 
@@ -162,10 +163,31 @@ Parameters:
 ## POST
 ### */postListingSet*
 #### Add new set of listing data to database
+Parameters:
+`req.body {
+ listing_id: number,
+ name: string
+ photo1_a: string,
+ photo1_b: string,
+ photo1_caption: string,
+ ...
+}`
 
+###### Response Sample:
+`{
+    "fieldCount": 0,
+    "affectedRows": 1,
+    "insertId": 101,
+    "serverStatus": 2,
+    "warningCount": 0,
+    "message": "",
+    "protocol41": true,
+    "changedRows": 0
+}`
 
+## PATCH
 ### */favorite*
-  #### Add or remove listing as favorite
+  #### To toggle listing as favorite or remove as favorite
 
   Parameters:
   `listing - number`

@@ -59,7 +59,7 @@ app.delete('/deleteSet', (req, res) => {
 
 //post data set, insert data set into db
 app.post('/postListingSet', (req, res) => {
-  let dataSet = req.body.dataSet;
+  let dataSet = req.body
   console.log('dataSet', dataSet)
   insertDataSet(dataSet)
   .then((results) => {
@@ -95,7 +95,7 @@ app.get('/listing-info', (req, res) => {
     //identifier is name
     getMainRouteString(id)
     .then((results) => {
-      console.log('results', results)
+     // console.log('results', results)
       res.send(results);
     })
     .catch((err) => {
@@ -118,7 +118,7 @@ app.get('/listing-info', (req, res) => {
 // reload page with product identifier in url
 app.use('/:id', express.static(__dirname + '/../public/index.html'));
 
-app.post('/favorite', (req, res) => {
+app.patch('/favorite', (req, res) => {
   let id = req.body.listingId;
   console.log('id', id)
   toggleFavorite(id)
