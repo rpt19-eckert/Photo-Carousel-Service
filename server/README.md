@@ -1,12 +1,12 @@
-#CRUD API
+# CRUD API
 
-##DELETE    /deleteSet
-####Delete a set of data from Photos Table
+## DELETE    /deleteSet
+#### Delete a set of data from Photos Table
 Parameter: listingId - number
 req.body = {
  listingId: 10012,
 }
-######Response Sample
+###### Response Sample
 {
     "fieldCount": 0,
     "affectedRows": 0,
@@ -18,11 +18,11 @@ req.body = {
     "changedRows": 0
 }
 
-##GET  /:id/rec-photos
-####Get a set of photos according to the given listingId
+## GET  /:id/rec-photos
+#### Get a set of photos according to the given listingId
 Parameter: :id - number
 
-######Response Sample
+###### Response Sample
  {
     "photo1": "https://fec-photos.s3-us-west-1.amazonaws.com/coverPics/Cover01Small.jpg",
     "photo2": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic02Small.jpg",
@@ -60,8 +60,8 @@ Parameter: :id - number
 ##POST    /postListingSet
 #### Add new set of listing data to database
 
-##PUT    /updatePhotoFromId
-####Updates a photo url from given listingId
+## PUT    /updatePhotoFromId
+#### Updates a photo url from given listingId
 parameters: listingId - number
             item - string
             photoUrl - string
@@ -72,7 +72,7 @@ req.body = {
  photoUrl: 'http//photo.site.com'
 }
 
-######Response Sample:
+###### Response Sample:
 
 {
     "fieldCount": 0,
@@ -85,7 +85,7 @@ req.body = {
     "changedRows": 1
 }
 
-##GET    /listing-info
+## GET    /listing-info
 #### gets the array of data from one data set from the photos table
 
 parameter:
@@ -93,7 +93,7 @@ req.query {
  listingId: 10001
 }
 
-######Response Sample:
+###### Response Sample:
 {
     id: 20,
     listing_id: 10020,
@@ -193,7 +193,7 @@ req.query {
     updatedAt: null
   }
 
-  ##POST    /favorite
+  ## POST    /favorite
   #### Add or remove listing as favorite
 
   Parameter
@@ -202,7 +202,7 @@ req.query {
     listing: 10001
   }
 
-######Response Sample:
+###### Response Sample:
   {
     "fieldCount": 0,
     "affectedRows": 1,
