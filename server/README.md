@@ -1,6 +1,6 @@
 # CRUD API
 
-## DELETE    /deleteSet
+## DELETE    */deleteSet*
 #### Delete a set of data from Photos Table
 Parameter:
 `listingId - number`
@@ -20,7 +20,7 @@ Parameter:
     "changedRows": 0
 }`
 
-## GET  /:id/rec-photos
+## GET  */:id/rec-photos*
 #### Get a set of photos according to the given listingId
 Parameter:
 `:id - number`
@@ -60,10 +60,10 @@ Parameter:
 }`
 
 
-## POST    /postListingSet
+## POST    */postListingSet*
 #### Add new set of listing data to database
 
-## PUT    /updatePhotoFromId
+## PUT    */updatePhotoFromId*
 #### Updates a photo url from given listingId
 parameters:
 `listingId - number
@@ -89,7 +89,7 @@ parameters:
     "changedRows": 1
 }`
 
-## GET    /listing-info
+## GET    */listing-info*
 #### gets the array of data from one data set from the photos table
 
 parameter:
@@ -198,7 +198,7 @@ parameter:
     updatedAt: null
   }
 
-  ## POST    /favorite
+  ## POST    */favorite*
   #### Add or remove listing as favorite
 
   Parameter:
