@@ -3,11 +3,12 @@
 ## DELETE    /deleteSet
 #### Delete a set of data from Photos Table
 Parameter: listingId - number
-req.body = {
+
+`req.body = {
  listingId: 10012,
-}
+}`
 ###### Response Sample
-{
+`{
     "fieldCount": 0,
     "affectedRows": 0,
     "insertId": 0,
@@ -16,14 +17,14 @@ req.body = {
     "message": "",
     "protocol41": true,
     "changedRows": 0
-}
+}`
 
 ## GET  /:id/rec-photos
 #### Get a set of photos according to the given listingId
 Parameter: :id - number
 
 ###### Response Sample
- {
+ `{
     "photo1": "https://fec-photos.s3-us-west-1.amazonaws.com/coverPics/Cover01Small.jpg",
     "photo2": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic02Small.jpg",
     "photo3": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic03Small.jpg",
@@ -54,7 +55,7 @@ Parameter: :id - number
     "photo28": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic28Small.jpg",
     "photo29": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic29Small.jpg",
     "photo30": "https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/mainPic30Small.jpg"
-}
+}`
 
 
 ##POST    /postListingSet
@@ -66,15 +67,15 @@ parameters: listingId - number
             item - string
             photoUrl - string
 
-req.body = {
+`req.body = {
  listingId: 10012,
  item: 'photo6_a',
  photoUrl: 'http//photo.site.com'
-}
+}`
 
 ###### Response Sample:
 
-{
+`{
     "fieldCount": 0,
     "affectedRows": 1,
     "insertId": 0,
@@ -83,18 +84,20 @@ req.body = {
     "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
     "protocol41": true,
     "changedRows": 1
-}
+}`
 
 ## GET    /listing-info
 #### gets the array of data from one data set from the photos table
 
 parameter:
-req.query {
+
+
+`req.query {
  listingId: 10001
-}
+}`
 
 ###### Response Sample:
-{
+`{
     id: 20,
     listing_id: 10020,
     name: 'Optical_Firewall_Clicksandmortar_house',
@@ -198,6 +201,7 @@ req.query {
 
   Parameter
   listing - number
+
   req.body {
     listing: 10001
   }
