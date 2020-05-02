@@ -2,15 +2,15 @@
 
 ## Table of Contents
 
-1. [GET](#GET)
-1. [POST](#POST)
+1. [GET](#GET-*/listing-info*)
+1. [POST](#POST-*/:id/rec-photos*)
 1. [PUT](#PUT)
 1. [DELETE](#DELETE)
 
 
 
 
-## GET    */listing-info*
+## GET */listing-info*
 #### gets the array of data from one data set from the photos table
 
 parameters:
@@ -118,7 +118,7 @@ parameters:
     updatedAt: null
   }`
 
-## GET  */:id/rec-photos*
+## GET */:id/rec-photos*
 #### Get a set of photos according to the given listingId
 Parameters:
 `:id - number`
