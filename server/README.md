@@ -196,7 +196,7 @@ parameter:
     photo30_caption: null,
     createdAt: 2020-03-31T06:00:00.000Z,
     updatedAt: null
-  }
+  }`
 
   ## POST    */favorite*
   #### Add or remove listing as favorite
