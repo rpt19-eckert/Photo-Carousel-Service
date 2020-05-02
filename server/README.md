@@ -163,7 +163,8 @@ Parameters:
 ### */postListingSet*
 #### Add new set of listing data to database
 
-## POST */favorite*
+
+### */favorite*
   #### Add or remove listing as favorite
 
   Parameters:
