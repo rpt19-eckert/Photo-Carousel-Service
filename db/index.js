@@ -20,6 +20,7 @@ const getMainRouteString = (id) => {
 //insert new set of Data into db
 
 const insertDataSet = (data) => {
+
   return new Promise((resolve, reject) => {
     let select_query_name = `INSERT INTO Photos SET ?`;
     db.query(select_query_name, data, (err, results) => {
@@ -48,7 +49,7 @@ const deleteDataSet = (id) => {
 //update data set
 const updateDataSet = (id, item, newData) => {
   return new Promise((resolve, reject) => {
-    let select_query_num = `UPDATE Photos SET ${item} = ${newData}WHERE listing_id=${id}`;
+    let select_query_num = `UPDATE Photos SET ${item} = ${newData} WHERE listing_id=${id}`;
     db.query(select_query_num, (err, results) => {
       if (err) {
         reject(err);

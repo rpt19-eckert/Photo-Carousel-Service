@@ -50,6 +50,7 @@ app.delete('/deleteSet', (req, res) => {
   deleteDataSet(id)
   .then((results) => {
     res.send(results);
+    console.log('data deleted')
   })
   .catch((err) => {
     console.log('error', err);
@@ -59,10 +60,11 @@ app.delete('/deleteSet', (req, res) => {
 //post data set, insert data set into db
 app.post('/postListingSet', (req, res) => {
   let dataSet = req.body.dataSet;
-  console.log('id', id)
+  console.log('dataSet', dataSet)
   insertDataSet(dataSet)
   .then((results) => {
     res.send(results);
+    console.log('posted')
   })
   .catch((err) => {
     console.log('error', err);
@@ -77,6 +79,7 @@ app.put('/updatePhotoFromId', (req, res) => {
    updateDataSet(id, item, newPhoto)
    .then((results) => {
     res.send(results);
+    console.log('updated')
   })
   .catch((err) => {
     console.log('err', err);
@@ -87,10 +90,12 @@ app.put('/updatePhotoFromId', (req, res) => {
 //get product by unique identifier using req object query property.
 app.get('/listing-info', (req, res) => {
   let id = req.query.listingId;
+  console.log('id', id)
   if (isNaN(Number(id))) {
     //identifier is name
     getMainRouteString(id)
     .then((results) => {
+      console.log('results', results)
       res.send(results);
     })
     .catch((err) => {
@@ -101,6 +106,7 @@ app.get('/listing-info', (req, res) => {
     id = Number(id);
     getMainRouteNum(id)
     .then((results) => {
+      console.log('results', results)
       res.send(results);
     })
     .catch((err) => {
