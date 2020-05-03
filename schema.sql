@@ -1,13 +1,13 @@
-DROP DATABASE IF EXISTS photo_gallery;
+DROP DATABASE IF EXISTS photo_galleryTwo;
 
-CREATE DATABASE photo_gallery;
+CREATE DATABASE photo_galleryTwo;
 
-USE photo_gallery;
+USE photo_galleryTwo;
 
-CREATE TABLE IF NOT EXISTS Photos (
-  id INT(5) AUTO_INCREMENT PRIMARY KEY,
-  listing_id INT(5),
-  name VARCHAR(100),
+CREATE TABLE IF NOT EXISTS PhotosTwo (
+  id int NOT NULL AUTO_INCREMENT,
+  listing_id INT,
+  listingName VARCHAR(100),
   is_favorite BOOLEAN,
   photo1_a VARCHAR(150),
   photo1_b VARCHAR(150),
@@ -39,69 +39,10 @@ CREATE TABLE IF NOT EXISTS Photos (
   photo10_a VARCHAR(150),
   photo10_b VARCHAR(150),
   photo10_caption VARCHAR(150),
-  photo11_a VARCHAR(150),
-  photo11_b VARCHAR(150),
-  photo11_caption VARCHAR(150),
-  photo12_a VARCHAR(150),
-  photo12_b VARCHAR(150),
-  photo12_caption VARCHAR(150),
-  photo13_a VARCHAR(150),
-  photo13_b VARCHAR(150),
-  photo13_caption VARCHAR(150),
-  photo14_a VARCHAR(150),
-  photo14_b VARCHAR(150),
-  photo14_caption VARCHAR(150),
-  photo15_a VARCHAR(150),
-  photo15_b VARCHAR(150),
-  photo15_caption VARCHAR(150),
-  photo16_a VARCHAR(150),
-  photo16_b VARCHAR(150),
-  photo16_caption VARCHAR(150),
-  photo17_a VARCHAR(150),
-  photo17_b VARCHAR(150),
-  photo17_caption VARCHAR(150),
-  photo18_a VARCHAR(150),
-  photo18_b VARCHAR(150),
-  photo18_caption VARCHAR(150),
-  photo19_a VARCHAR(150),
-  photo19_b VARCHAR(150),
-  photo19_caption VARCHAR(150),
-  photo20_a VARCHAR(150),
-  photo20_b VARCHAR(150),
-  photo20_caption VARCHAR(150),
-  photo21_a VARCHAR(150),
-  photo21_b VARCHAR(150),
-  photo21_caption VARCHAR(150),
-  photo22_a VARCHAR(150),
-  photo22_b VARCHAR(150),
-  photo22_caption VARCHAR(150),
-  photo23_a VARCHAR(150),
-  photo23_b VARCHAR(150),
-  photo23_caption VARCHAR(150),
-  photo24_a VARCHAR(150),
-  photo24_b VARCHAR(150),
-  photo24_caption VARCHAR(150),
-  photo25_a VARCHAR(150),
-  photo25_b VARCHAR(150),
-  photo25_caption VARCHAR(150),
-  photo26_a VARCHAR(150),
-  photo26_b VARCHAR(150),
-  photo26_caption VARCHAR(150),
-  photo27_a VARCHAR(150),
-  photo27_b VARCHAR(150),
-  photo27_caption VARCHAR(150),
-  photo28_a VARCHAR(150),
-  photo28_b VARCHAR(150),
-  photo28_caption VARCHAR(150),
-  photo29_a VARCHAR(150),
-  photo29_b VARCHAR(150),
-  photo29_caption VARCHAR(150),
-  photo30_a VARCHAR(150),
-  photo30_b VARCHAR(150),
-  photo30_caption VARCHAR(150),
-  createdAt DATE,
-  updatedAt DATE
+  PRIMARY KEY(id)
 );
+
+INSERT into PhotosTwo (listing_Id, listingName, is_favorite, photo1_a, photo1_b, photo1_caption, photo2_a, photo2_b, photo2_caption, photo3_a, photo3_b, photo3_caption, photo4_a, photo4_b, photo4_caption, photo5_a, photo5_b, photo5_caption, photo6_a, photo6_b, photo6_caption, photo7_a, photo7_b, photo7_caption, photo8_a, photo8_b, photo8_caption, photo9_a, photo9_b, photo9_caption, photo10_a, photo10_b, photo10_caption) VALUES (10001, "Exercitationem_vero_itaque_iste", 0,"https://i.picsum.photos/id/155/1440/960.jpg", "https://i.picsum.photos/id/155/720/455.jpg", "Voluptates minus quas.", "https://i.picsum.photos/id/157/1440/960.jpg", "https://i.picsum.photos/id/157/720/455.jpg", "Alias eveniet impedit ducimus laboriosam.", "https://i.picsum.photos/id/194/1440/960.jpg", "https://i.picsum.photos/id/194/720/455.jpg", "Nisi in perspiciatis.", "https://i.picsum.photos/id/180/1440/960.jpg", "https://i.picsum.photos/id/180/720/455.jpg", "Quia voluptatem voluptatem delectus quidem.", "https://i.picsum.photos/id/183/1440/960.jpg", "https://i.picsum.photos/id/183/720/455.jpg", "Qui architecto quae magnam consectetur fuga necessitatibus harum.", "https://i.picsum.photos/id/166/1440/960.jpg", "https://i.picsum.photos/id/166/720/455.jpg", "Rerum est numquam.", "https://i.picsum.photos/id/158/1440/960.jpg", "https://i.picsum.photos/id/158/720/455.jpg", "Quas aliquid quo.", "https://i.picsum.photos/id/121/1440/960.jpg", "https://i.picsum.photos/id/121/720/455.jpg", "Hic iusto autem qui veniam ipsa quod autem voluptatum.", "https://i.picsum.photos/id/151/1440/960.jpg", "https://i.picsum.photos/id/151/720/455.jpg", "Rerum minus excepturi.", "https://i.picsum.photos/id/198/1440/960.jpg", "https://i.picsum.photos/id/198/720/455.jpg", "Neque veniam sunt molestiae placeat explicabo impedit unde quod.");
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql

@@ -3,12 +3,12 @@ const mysql = require('mysql');
 const db = mysql.createConnection({
   user: 'root',
   password: 'helloworld',
-  database: 'photo_gallery',
+  database: 'photo_galleryTwo',
 });
 
 const getMainRouteString = (listingId) => {
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT * FROM Photos WHERE name='${listingId}'`;
+    let queryString = `SELECT * FROM PhotosTwo WHERE name='${listingId}'`;
     db.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -22,7 +22,7 @@ const getMainRouteString = (listingId) => {
 const insertDataSet = (data) => {
 
   return new Promise((resolve, reject) => {
-    let queryString = `INSERT INTO Photos SET ?`;
+    let queryString = `INSERT INTO PhotosTwo SET ?`;
     db.query(queryString, data, (err, results) => {
       if (err) {
         reject(err);
@@ -36,7 +36,7 @@ const insertDataSet = (data) => {
 
 const deleteDataSet = (listingId) => {
   return new Promise ((resolve, reject) => {
-    let queryString = `DELETE FROM Photos WHERE ID = ${listingId}`;
+    let queryString = `DELETE FROM PhotosTwo WHERE ID = ${listingId}`;
     db.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -49,7 +49,7 @@ const deleteDataSet = (listingId) => {
 //update data set
 const updateDataSet = (listingId, item, newData) => {
   return new Promise((resolve, reject) => {
-    let queryString = `UPDATE Photos SET ${item} = ${newData} WHERE listing_id=${listingId}`;
+    let queryString = `UPDATE PhotosTwo SET ${item} = ${newData} WHERE listing_id=${listingId}`;
     db.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -61,7 +61,7 @@ const updateDataSet = (listingId, item, newData) => {
 
 const getMainRouteNum = (listingId) => {
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT * FROM Photos WHERE listing_id=${listingId}`;
+    let queryString = `SELECT * FROM PhotosTwo WHERE listing_id=${listingId}`;
     db.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -73,7 +73,7 @@ const getMainRouteNum = (listingId) => {
 
 const toggleFavorite = (id) => {
   return new Promise((resolve, reject) => {
-    let queryString = `UPDATE Photos SET is_favorite = 1 - is_favorite WHERE listing_id=${id}`;
+    let queryString = `UPDATE PhotosTwo SET is_favorite = 1 - is_favorite WHERE listing_id=${id}`;
     db.query(queryString, (err, results) => {
       if (err) {
         reject(err);
