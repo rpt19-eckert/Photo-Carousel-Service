@@ -34,18 +34,18 @@ function createDataSetPerRow (id, queryId) {
           oneString += `${largeImgUrl}, ${smallImgUrl}, ${caption},`;
         }
       }
-      listingId++;
-      tableQueryId++;
-      dataString += `${oneString} \n`;
+    listingId++;
+    tableQueryId++;
+    dataString += `${oneString} \n`;
 
-}
-return dataString;
+  }
+  return dataString;
 
 }
 
 function writeStream (num, id) {
 
-  for (var i = 0; i < 1000000; i++) {
+  for (var i = 0; i < 500000; i++) {
     file.write(createDataSetPerRow(num, id))
     num = num+10;
     id = id+10;
