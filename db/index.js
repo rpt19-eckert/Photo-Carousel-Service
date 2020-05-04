@@ -1,10 +1,50 @@
 const mysql = require('mysql');
+const fs = require('fs');
+const fastcsv = require('fast-csv');
+
+// const stream = fs.createReadStream("/Users/yingwenchen/Desktop/HR project/HR_RPT/SDC/jason_FEC_service/db/exampleData.csv");
 
 const db = mysql.createConnection({
   user: 'root',
   password: 'helloworld',
   database: 'photo_galleryTwo',
 });
+
+// let csvData = [];
+// let csvStream = fastcsv
+// .parse()
+// .on('data', function(data) {
+//   csvData.push(data);
+// })
+// .on('end', function () {
+
+// const db = mysql.createConnection({
+//   user: 'root',
+//   password: 'helloworld',
+//   database: 'photo_galleryTwo',
+// });
+//   db.connect(error => {
+//     if (error) {
+//       console.error(error);
+//     } else {
+//       let queryString =  'INSERT INTO photosTwo (listing_Id, listingName, is_favorite, photo1_a, photo1_b, photo1_caption, photo2_a, photo2_b, photo2_caption, photo3_a, photo3_b, photo3_caption, photo4_a, photo4_b, photo4_caption, photo5_a, photo5_b, photo5_caption, photo6_a, photo6_b, photo6_caption, photo7_a, photo7_b, photo7_caption, photo8_a, photo8_b, photo8_caption, photo9_a, photo9_b, photo9_caption, photo10_a, photo10_b, photo10_caption) VALUES ?';
+
+//       db.query(queryString, [csvData], (error, response) => {
+//        console.log(error || response)
+//       })
+//     }
+//   })
+
+
+// })
+
+// stream.pipe(csvStream);
+
+
+
+
+
+
 
 const getMainRouteString = (listingId) => {
   return new Promise((resolve, reject) => {
