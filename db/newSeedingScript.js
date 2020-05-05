@@ -12,7 +12,7 @@ function createRandomNum () {
 function createDataSetPerRow (id, queryId) {
   var dataString = '';
   var listingId = id;
-  var tableQueryId = queryId
+  var tableQueryId = queryId;
 
   for (var i = 0; i < 10; i++) {
 
@@ -20,7 +20,7 @@ function createDataSetPerRow (id, queryId) {
     var listingName =  randomSentence.split(' ').join('_').slice(0, -1);
 
 
-    var oneString = `${tableQueryId},${listingId},${listingName},0,`
+    var oneString = `${tableQueryId},${listingId},${listingName},0,`;
 
       for (var j = 0; j < 10; j++) {
         var randomId = createRandomNum();
