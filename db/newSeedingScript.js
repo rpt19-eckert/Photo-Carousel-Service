@@ -18,17 +18,17 @@ function createDataSetPerRow (id, queryId) {
 
     var randomSentence = faker.lorem.sentence();
     var listingName =  randomSentence.split(' ').join('_').slice(0, -1);
-
+    var numOfSetOfImages = 5 + Math.floor(Math.random() * 5)
 
     var oneString = `${tableQueryId},${listingId},${listingName},0,`;
 
-      for (var j = 0; j < 10; j++) {
+      for (var j = 0; j <= numOfSetOfImages; j++) {
         var randomId = createRandomNum();
         var caption = faker.lorem.sentence();
         var largeImgUrl = `https://i.picsum.photos/id/${randomId}/1440/960.jpg`;
         var smallImgUrl = `https://i.picsum.photos/id/${randomId}/720/455.jpg`;
 
-        if (j === 9) {
+        if (j === numOfSetOfImages) {
           oneString += `${largeImgUrl},${smallImgUrl},${caption}`;
         } else {
           oneString += `${largeImgUrl}, ${smallImgUrl}, ${caption},`;
