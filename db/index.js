@@ -1,15 +1,18 @@
-const {pool, client} = require('./config.js');
+const Pool = require('pg').Pool;
 
-// pool.on('connect', () => {
-//   console.log('connected to the db');
-// })
-//client.connect()
+const pool = new Pool({
+  user: 'yingwenchen',
+  host: 'localhost',
+  database: 'postgres',
+  port: 5432
+})
 
+console.log('runs db file')
 
 const getMainRouteString = (listingId) => {
-  console.log('went in here')
+  console.log('listingId', listingId)
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT * FROM PhotosTwo WHERE name='${listingId}'`;
+    let queryString = `SELECT * FROM Photos WHERE name='${listingId}'`;
     pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -62,7 +65,7 @@ const updateDataSet = (listingId, item, newData) => {
 
 const getMainRouteNum = (listingId) => {
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT * FROM PhotosTwo WHERE listing_id=${listingId}`;
+    let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
     pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -98,7 +101,7 @@ const recPhotos = (listingId) => {
 
 
 module.exports = {
-
+  pool,
   getMainRouteString,
   getMainRouteNum,
   toggleFavorite,

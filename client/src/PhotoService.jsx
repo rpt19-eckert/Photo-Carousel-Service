@@ -72,6 +72,8 @@ class PhotoService extends React.Component {
         dataType: 'text',
         success: (result) => {
           result = JSON.parse(result);
+          result = result.rows; //changed to adjust to postgres
+
           console.log('result in client', result);
           let numOfPhotos = this.dupGetNumOfListingPhotos(result[0]);
           this.setState(() => ({

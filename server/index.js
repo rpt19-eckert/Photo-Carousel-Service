@@ -106,7 +106,7 @@ app.get('/listing-info', (req, res) => {
     id = Number(id);
     getMainRouteNum(id)
     .then((results) => {
-     // console.log('results', results)
+     //console.log('results', results)
       res.send(results);
     })
     .catch((err) => {
