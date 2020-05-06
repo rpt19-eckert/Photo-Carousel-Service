@@ -1,6 +1,6 @@
 const faker = require ('faker');
 const fs = require ('fs');
-const file = fs.createWriteStream('./exampleData.csv')
+const file = fs.createWriteStream('./exampleDataTwo.csv')
 
 
 
@@ -22,17 +22,23 @@ function createDataSetPerRow (id, queryId) {
 
     var oneString = `${tableQueryId},${listingId},${listingName},0,`;
 
-      for (var j = 0; j <= numOfSetOfImages; j++) {
+      for (var j = 0; j < 10; j++) {
         var randomId = createRandomNum();
         var caption = faker.lorem.sentence();
         var largeImgUrl = `https://i.picsum.photos/id/${randomId}/1440/960.jpg`;
         var smallImgUrl = `https://i.picsum.photos/id/${randomId}/720/455.jpg`;
 
-        if (j === numOfSetOfImages) {
+
+        if (j < numOfSetOfImages) {
+          oneString += `${largeImgUrl},${smallImgUrl},${caption},`;
+        } else if (j === numOfSetOfImages){
           oneString += `${largeImgUrl},${smallImgUrl},${caption}`;
         } else {
-          oneString += `${largeImgUrl}, ${smallImgUrl}, ${caption},`;
+          oneString += `,${null},${null},${null}`;
         }
+        // if (j === 10) {
+        //   oneString.slice(0, -1)
+        // }
       }
     listingId++;
     tableQueryId++;
@@ -45,7 +51,7 @@ function createDataSetPerRow (id, queryId) {
 
 function writeStream (num, id) {
 
-  for (var i = 0; i < 500000; i++) {
+  for (var i = 0; i < 1; i++) {
     file.write(createDataSetPerRow(num, id))
     num = num+10;
     id = id+10;
