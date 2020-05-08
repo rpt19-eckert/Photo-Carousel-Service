@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3002;
 const bodyParser = require('body-parser');
-const { db, getMainRouteNum, getMainRouteString, toggleFavorite, recPhotos, insertDataSet, deleteDataSet, updateDataSet } = require('../db/index.js');
+const { Photos } = require('../db/index.js');
 
 const fullPath = '/Users/jasonjacob/Desktop/seniorProjects/rpt19-front-end-capstone/jason_FEC_service/public/index.html';
 
