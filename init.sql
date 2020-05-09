@@ -48,3 +48,4 @@ CREATE TABLE PhotosTwo (
 
 
 COPY photostwo FROM '/Users/yingwenchen/Desktop/HR project/HR_RPT/SDC/jason_FEC_service/db/exampleData.csv' DELIMITER ',';
+CREATE UNIQUE INDEX listing_idx ON photosTwo (listing_id);

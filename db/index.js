@@ -12,7 +12,7 @@ console.log('runs db file')
 const getMainRouteString = (listingId) => {
   console.log('listingId', listingId)
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT * FROM Photos WHERE name='${listingId}'`;
+    let queryString = `SELECT * FROM PhotosTwo WHERE name='${listingId}'`;
     pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
