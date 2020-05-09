@@ -124,17 +124,34 @@ const getMainRouteNum = (id, callback) => {
 
 
 };
+//have to fix updateDataSet to update embedded document
+// const updateDataSet = (id, item, newPhoto) => {
+//   Photos.find({listingId: `${id}`}).exec(function (err, results) {
+//     if (err) {
+//       console.log('err', err);
 
-// const toggleFavorite = (id) => {
-//   return new Promise((resolve, reject) => {
-//     let queryString = `UPDATE PhotosTwo SET is_favorite = 1 - is_favorite WHERE listing_id=${id}`;
-//     db.query(queryString, (err, results) => {
-//       if (err) {
-//         reject(err);
-//       }
-//       resolve(results);
-//     });
-//   });
+
+//     } else {
+//       let photoSetArray = results[0].imageSets
+//       console.log('newBoolean', newBoolean)
+//       let filter = { listingId: `${id}` };
+//       let update = {[item]: !newBoolean}
+//       Photos.findOneAndUpdate(filter, update).exec(function (err, results) {
+//         if (err) {
+//           callback(err, null)
+//           console.log('err', err)
+//         } else {
+//           callback(null, results)
+//           console.log('updated is_Favorite')
+//         }
+//       })
+
+//     }
+
+//      // console.log('results from db',  results[0])
+//      //callback(null, results[0])
+
+//   })
 // };
 
 // const recPhotos = (listingId) => {

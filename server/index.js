@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-//routing for recommendation service
+//routing for recommendation service NOT FINISHED
 app.get('/:id/rec-photos', (req, res) => {
   let id = req.path.split('/')[1];
   if (id === 'rec-photos') {
