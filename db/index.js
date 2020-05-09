@@ -64,7 +64,7 @@ const updateDataSet = (listingId, item, newData) => {
 }
 
 const getMainRouteNum = (listingId) => {
-  console.log('getMainRoute')
+  console.log('getMainRoute', listingId)
   return new Promise((resolve, reject) => {
     let queryString = `SELECT * FROM photostwo WHERE listing_id=${listingId}`;
     pool.query(queryString, (err, results) => {

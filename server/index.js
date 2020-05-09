@@ -89,7 +89,7 @@ app.put('/updatePhotoFromId', (req, res) => {
 
 //get product by unique identifier using req object query property.
 app.get('/listing-info', (req, res) => {
-  let id = req.body.listingId;
+  let id = req.query.listingId;
   console.log('id', id)
   if (isNaN(Number(id))) {
     //identifier is name
