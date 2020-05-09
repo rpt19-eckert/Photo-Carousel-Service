@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3002;
 const bodyParser = require('body-parser');
-const { Photos } = require('../db/index.js');
+const { Db, Photos, getMainRouteString, getMainRouteNum, insertDataSet, deleteDataSet, toggleFavorite } = require('../db/index.js');
 
 const fullPath = '/Users/jasonjacob/Desktop/seniorProjects/rpt19-front-end-capstone/jason_FEC_service/public/index.html';
 
@@ -47,28 +47,30 @@ app.get('/:id/rec-photos', (req, res) => {
 app.delete('/deleteSet', (req, res) => {
   let id = req.body.listingId;
   console.log('id', id)
-  deleteDataSet(id)
-  .then((results) => {
-    res.send(results);
-    console.log('data deleted')
+  deleteDataSet(id, (err, results) => {
+    if (err) {
+      console.log('err', err);
+    } else {
+      var stringifyResults = JSON.stringify(results);
+      res.end(stringifyResults);
+    }
   })
-  .catch((err) => {
-    console.log('error', err);
-  });
+
 });
 
 //post data set, insert data set into db
 app.post('/postListingSet', (req, res) => {
   let dataSet = req.body
   console.log('dataSet', dataSet)
-  insertDataSet(dataSet)
-  .then((results) => {
-    res.send(results);
-    console.log('posted')
+  insertDataSet(dataSet, (err, results)=>{
+    if (err) {
+      console.log('err', err);
+    } else {
+      var stringifyResults = JSON.stringify(results);
+      res.end(stringifyResults);
+    }
   })
-  .catch((err) => {
-    console.log('error', err);
-  });
+
 })
 
 //update data set
@@ -89,29 +91,36 @@ app.put('/updatePhotoFromId', (req, res) => {
 
 //get product by unique identifier using req object query property.
 app.get('/listing-info', (req, res) => {
-  let id = req.query.listingId;
+  let id = req.body.listingId;
   console.log('id', id)
   if (isNaN(Number(id))) {
     //identifier is name
-    getMainRouteString(id)
-    .then((results) => {
-     // console.log('results', results)
-      res.send(results);
+    getMainRouteString(id, (err, results) => {
+      if (err) {
+        console.log('err', err)
+      } else {
+        var stringifyResults = JSON.stringify(results);
+        res.end(stringifyResults)
+      }
     })
-    .catch((err) => {
-      console.log('err', err);
-    });
   } else {
     //identifier is lisitng_id
     id = Number(id);
-    getMainRouteNum(id)
-    .then((results) => {
-     // console.log('results', results)
-      res.send(results);
+    getMainRouteNum(id, (err, results) => {
+      if (err) {
+        console.log('err', err)
+      } else {
+        var stringifyResults = JSON.stringify(results);
+        res.end(stringifyResults)
+      }
     })
-    .catch((err) => {
-      console.log('error', err);
-    });
+    // .then((results) => {
+    //   console.log('results', results)
+    //   res.send(results);
+    // })
+    // .catch((err) => {
+    //   console.log('error', err);
+    // });
   }
 });
 
@@ -121,13 +130,15 @@ app.use('/:id', express.static(__dirname + '/../public/index.html'));
 app.patch('/favorite', (req, res) => {
   let id = req.body.listingId;
   console.log('id', id)
-  toggleFavorite(id)
-  .then((results) => {
-    res.send(results);
+  toggleFavorite(id, (err, results) => {
+    if (err) {
+      console.log('err', err);
+    } else {
+
+      res.status(202).json(results);
+    }
   })
-  .catch((err) => {
-    console.log('error', err);
-  });
+  console.log('server favorite')
 });
 
 module.exports = app;

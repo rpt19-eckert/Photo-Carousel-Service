@@ -39,10 +39,6 @@ function createDataSetPerRow (id) {
             [`photo${j + 1}_caption`]: `${caption}.`
           }
           oneSetOfObject.imageSets.push(imgSet);
-
-
-
-
       }
     listingId++;
 
@@ -51,27 +47,10 @@ function createDataSetPerRow (id) {
 
   }
 
-  return `${dataArray}`
+  return `${dataArray}`;
 
 }
-//console.log(createDataSetPerRow(10001))
 
-/*
-
-let photoSchema = mongoose.Schema({
-listingId: Number,
-name: String,
-is_favorite: Boolean,
-imagesSet: [{
-  photo1_a: String,
-  photo1_b: String,
-  photo1_caption: String
-}]
-});
-
-
-
-*/
 
 function writeStream (num) {
 

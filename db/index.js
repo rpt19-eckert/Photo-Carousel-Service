@@ -1,85 +1,129 @@
 const mongoose = require('mongoose');
-let json = require('./exampleData.json');
-mongoose.connect('mongodb://localhost/photo_gallery', {
+const { MongoClient, Db} = require('mongodb');
+
+const mongoURI = 'mongodb://localhost/photo_gallery';
+const db = mongoose.connect(mongoURI, {
   useNewUrlParser: true
 });
 
+db
+  .then(db => console.log(`Connected to: ${mongoURI}`))
+  .catch(err => {
+    console.log(`There was a problem connecting to mongo at: ${mongoURI}`)
+    console.log(err);
+  });
+
 let photoSchema = mongoose.Schema({
-listingId: Number,
+listingId: {type: String, index: true},
 is_favorite: Boolean,
-imageSet: [{
+imageSets: [{
   photo1_a: String,
   photo1_b: String,
   photo1_caption: String
 }]
-});
+}, { collection : 'Photos' });
 
 
 
-// const getMainRouteString = (listingId) => {
-//   return new Promise((resolve, reject) => {
-//     let queryString = `SELECT * FROM PhotosTwo WHERE name='${listingId}'`;
-//     db.query(queryString, (err, results) => {
-//       if (err) {
-//         reject(err);
-//       }
-//       resolve(results);
-//     });
-//   });
-// };
+ var Photos = mongoose.model('Photos', photoSchema, "Photos");
+
+
+let getMainRouteString = (id) => {
+  Photos.find({listingId: `${id}`}).exec(function (err, results) {
+    if (err) {
+      console.log('1')
+     callback(err, null);
+
+    }
+      console.log('2')
+     // console.log('results from db',  results[0])
+     callback(null, results[0])
+
+  })
+}
+
 // //insert new set of Data into db
 
-// const insertDataSet = (data) => {
+const insertDataSet = (data, callback) => {
 
-//   return new Promise((resolve, reject) => {
-//     let queryString = `INSERT INTO PhotosTwo SET ?`;
-//     db.query(queryString, data, (err, results) => {
-//       if (err) {
-//         reject(err);
-//       }
-//       resolve(results);
-//     });
-//   });
-// }
+    Photos.create(newData, function (err) {
+      if (err) {
+        return handleError(err)
+      } else {
+        console.log('saved')
+      }
+    })
+
+}
 
 // //Delete set of Data where id is...
 
-// const deleteDataSet = (listingId) => {
-//   return new Promise ((resolve, reject) => {
-//     let queryString = `DELETE FROM PhotosTwo WHERE ID = ${listingId}`;
-//     db.query(queryString, (err, results) => {
-//       if (err) {
-//         reject(err);
-//       }
-//       resolve(results);
-//     })
-//   })
-// }
+const deleteDataSet = (listingId, callback) => {
+  Photos.deleteOne({listingId: `${id}`}).exec(function (err) {
+    if (err) {
+      console.log('1')
+     callback(err, null);
 
-// //update data set
-// const updateDataSet = (listingId, item, newData) => {
-//   return new Promise((resolve, reject) => {
-//     let queryString = `UPDATE PhotosTwo SET ${item} = ${newData} WHERE listing_id=${listingId}`;
-//     db.query(queryString, (err, results) => {
-//       if (err) {
-//         reject(err);
-//       }
-//       resolve(results);
-//     });
-//   })
-// }
+    } else {
+      console.log('listing deleted')
+      callback()
+     // console.log('results from db',  results[0])
+    }
 
-// const getMainRouteNum = (listingId) => {
-//   return new Promise((resolve, reject) => {
-//     let queryString = `SELECT * FROM PhotosTwo WHERE listing_id=${listingId}`;
-//     db.query(queryString, (err, results) => {
-//       if (err) {
-//         reject(err);
-//       }
-//       resolve(results);
-//     });
-//   });
-// };
+
+  })
+}
+
+//update data set
+const toggleFavorite = (id, callback) => {
+  let newBoolean;
+  Photos.find({listingId: `${id}`}).exec(function (err, results) {
+    if (err) {
+      console.log('err', err);
+
+
+    } else {
+      let newBoolean = results[0].is_favorite
+      console.log('newBoolean', newBoolean)
+      let filter = { listingId: `${id}` };
+      let update = {is_favorite: !newBoolean}
+      Photos.findOneAndUpdate(filter, update).exec(function (err, results) {
+        if (err) {
+          callback(err, null)
+          console.log('err', err)
+        } else {
+          callback(null, results)
+          console.log('updated is_Favorite')
+        }
+      })
+
+    }
+
+     // console.log('results from db',  results[0])
+     //callback(null, results[0])
+
+  })
+
+}
+
+const getMainRouteNum = (id, callback) => {
+  // console.log('id from getMainROute', id)
+  // return new Promise((resolve, reject) => {
+    Photos.find({listingId: `${id}`}).exec(function (err, results) {
+      if (err) {
+        console.log('1')
+       callback(err, null);
+
+      }
+        console.log('2')
+       // console.log('results from db',  results[0])
+       callback(null, results[0])
+
+
+    })
+
+
+};
 
 // const toggleFavorite = (id) => {
 //   return new Promise((resolve, reject) => {
@@ -104,15 +148,15 @@ imageSet: [{
 //     });
 //   });
 // };
-var Photos = mongoose.model('Photos', photoSchema)
 
-// Photos.insertMany(json, (err, result) => {
-//   if (err) {
-//     console.log('Error in sample data insert');
-//   } else {
-//     console.log('Successful sample data insert');
-//   }
-// })
+
+
 module.exports = {
-Photos
+Db,
+getMainRouteString,
+getMainRouteNum,
+insertDataSet,
+deleteDataSet,
+toggleFavorite
+
 };
