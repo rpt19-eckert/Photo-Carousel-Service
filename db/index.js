@@ -12,7 +12,7 @@ console.log('runs db file')
 const getMainRouteString = (listingId) => {
   console.log('listingId', listingId)
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT * FROM PhotosTwo WHERE name='${listingId}'`;
+    let queryString = `SELECT * FROM Photos WHERE listingId='${listingId}'`;
     pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -26,7 +26,7 @@ const getMainRouteString = (listingId) => {
 const insertDataSet = (data) => {
 
   return new Promise((resolve, reject) => {
-    let queryString = `INSERT INTO PhotosTwo SET ?`;
+    let queryString = `INSERT INTO Photos SET ?`;
     client.query(queryString, data, (err, results) => {
       if (err) {
         reject(err);
@@ -40,7 +40,7 @@ const insertDataSet = (data) => {
 
 const deleteDataSet = (listingId) => {
   return new Promise ((resolve, reject) => {
-    let queryString = `DELETE FROM PhotosTwo WHERE ID = ${listingId}`;
+    let queryString = `DELETE FROM Photos WHERE ID = ${listingId}`;
     client.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -53,7 +53,7 @@ const deleteDataSet = (listingId) => {
 //update data set
 const updateDataSet = (listingId, item, newData) => {
   return new Promise((resolve, reject) => {
-    let queryString = `UPDATE Photostwo SET ${item} = ${newData} WHERE listing_id=${listingId}`;
+    let queryString = `UPDATE Photos SET ${item} = ${newData} WHERE listing_id=${listingId}`;
     client.query(queryString, (err, results) => {
       if (err) {
         reject(err);
@@ -66,19 +66,19 @@ const updateDataSet = (listingId, item, newData) => {
 const getMainRouteNum = (listingId) => {
   console.log('getMainRoute', listingId)
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT * FROM photostwo WHERE listing_id=${listingId}`;
+    let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
     pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
       }
-      resolve(results);
+      resolve(results.rows);
     });
   });
 };
 
 const toggleFavorite = (id) => {
   return new Promise((resolve, reject) => {
-    let queryString = `UPDATE PhotosTwo SET is_favorite = TRUE WHERE listing_id=${id}`;
+    let queryString = `UPDATE Listings SET is_favorite = TRUE WHERE listing_id=${id}`;
     pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
