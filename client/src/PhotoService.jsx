@@ -26,7 +26,28 @@ class PhotoService extends React.Component {
       nextPrevBorders: ['2px solid #404040', 'none', 'none', 'none'],
       nextPrevOpacities: ['100%', '70%', '70%', '70%']
     }
+    this.formatIncomingData = this.formatIncomingData.bind(this);
   };
+
+ formatIncomingData (input) {
+    //var newArray = [];
+    var resultObj = {};
+    // iterate over input array then grab each obj elem
+    for (var i = 0; i < input.length; i++) {
+      //this is the obj
+      var elem = input[i];
+      for (var key in elem) {
+           if (key === 'photo_a') {
+             resultObj[`photo${i+1}_a`] = elem[key]
+           } else if (key === 'photo_b') {
+              resultObj[`photo${i+1}_b`] = elem[key]
+           } else if (key === 'photo_caption') {
+             resultObj[`photo${i+1}_caption`] = elem[key]
+           }
+      }
+    }
+    return [resultObj]
+  }
 
   handleViewPhotos (e) {
     e.preventDefault;
@@ -72,16 +93,18 @@ class PhotoService extends React.Component {
         dataType: 'text',
         success: (result) => {
           result = JSON.parse(result);
-          result = result.rows; //changed to adjust to postgres
-
+          //result = result; //changed to adjust to postgres
+          var formattedResult = this.formatIncomingData(result)
           console.log('result in client', result);
-          let numOfPhotos = this.dupGetNumOfListingPhotos(result[0]);
+          let numOfPhotos = result.length;
+          console.log('formattedData', formattedResult)
+
           this.setState(() => ({
-            currentListing: result[0],
-            currentPhotoUrl: result[0].photo1_a,
-            nextPrevImages: [result[0].photo1_b, result[0].photo2_b, result[0].photo3_b, result[0].photo4_b],
+            currentListing: formattedResult[0],
+            currentPhotoUrl: formattedResult[0].photo1_a,
+            nextPrevImages: [formattedResult[0].photo1_b, formattedResult[0].photo2_b, formattedResult[0].photo3_b, formattedResult[0].photo4_b],
             numOfCurrentListingPhotos: numOfPhotos,
-            currentPhotoCaption: result[0].photo1_caption
+            currentPhotoCaption: formattedResult[0].photo1_caption
           }));
         },
         error: (err) => {
