@@ -90,11 +90,15 @@ const toggleFavorite = (id) => {
 
 const recPhotos = (listingId) => {
   return new Promise((resolve, reject) => {
-    let queryString = `SELECT photo1_b, photo2_b, photo3_b, photo4_b, photo5_b, photo6_b, photo7_b, photo8_b, photo9_b, photo10_b, photo11_b, photo12_b, photo13_b, photo14_b, photo15_b, photo16_b, photo17_b, photo18_b, photo19_b, photo20_b, photo21_b, photo22_b, photo23_b, photo24_b, photo25_b, photo26_b, photo27_b, photo28_b, photo29_b, photo30_b FROM Photostwo WHERE listing_id=${listingId}`;
+    let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
     pool.query(queryString, (err, results) => {
       if (err) {
+        console.log('22')
         reject(err);
+
       }
+      console.log('33')
+      //console.log('dbresults', results)
       resolve(results);
     });
   });

@@ -1,3 +1,4 @@
+const nr = require('newrelic');
 const express = require('express');
 const app = express();
 const port = 3002;
@@ -25,24 +26,30 @@ app.get('/:id/rec-photos', (req, res) => {
   }
   recPhotos(id)
   .then((results) => {
-    results = results[0];
-    let keys = Object.keys(results);
-    let newKey;
-    for (let key of keys) {
-      if (results[key] === null) {
-        delete results[key];
-      } else {
-        newKey = key.split('_').shift();
-        results[newKey] = results[key];
-        delete results[key];
-      }
-  }
-    res.send(results);
+
+    res.send(results.rows);
   })
   .catch((err) => {
+    console.log('3')
     console.log('error', err);
   });
 });
+app.get('/:id/listingInfo', (req, res) => {
+  let id = req.path.split('/')[1];
+  if (id === 'rec-photos') {
+    id = 10001;
+  }
+  recPhotos(id)
+  .then((results) => {
+
+    res.send(results.rows);
+  })
+  .catch((err) => {
+    console.log('3')
+    console.log('error', err);
+  });
+});
+
 //delete a set where id = req.body.id
 app.delete('/deleteSet', (req, res) => {
   let id = req.body.listingId;
