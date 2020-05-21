@@ -1,0 +1,48 @@
+config:
+  target: "http://localhost:3002"
+  payload:
+      # path is relative to the location of the test script
+      path: "loadTestData.csv"
+      order: "sequence"
+      fields:
+        - "id"
+        - "listing_id"
+        - "photo_a"
+        - "photo_b"
+        - "photo_caption"
+  http:
+    timeout: 10
+
+  phases:
+    - duration: 1
+      arrivalRate: 1
+      rampTo: 1
+      name: "warm up the application"
+    - duration: 10
+      arrivalRate: 10
+      name: "warm up the application"
+    - duration: 10
+      arrivalRate: 50
+      name: 'stage 1'
+    - duration: 10
+      arrivalRate: 100
+      name: 'stage 2'
+    - duration: 10
+      arrivalRate: 200
+      name: 'stage 3'
+
+scenarios:
+  - flow:
+    - post:
+        url: "/postListingSet"
+        json:
+          id: "{{ id }}"
+          listing_id: "{{ listing_id }}"
+          photo_a: "{{ photo_a }}"
+          photo_b: "{{ photo_b }}"
+          photo_caption: "{{ photo_caption }}"
+
+
+
+
+

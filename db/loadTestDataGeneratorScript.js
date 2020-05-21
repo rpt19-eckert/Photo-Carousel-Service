@@ -60,6 +60,6 @@ function writeStream (num, id) {
   }
 //console.log(createDataSetPerRow(1000))
 
-writeStream(10010002, 30501831)
+writeStream(11500000, 59000000)
 
 

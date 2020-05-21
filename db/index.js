@@ -26,11 +26,17 @@ const getMainRouteString = (listingId) => {
 const insertDataSet = (data) => {
 
   return new Promise((resolve, reject) => {
-    let queryString = `INSERT INTO Photos SET ?`;
-    client.query(queryString, data, (err, results) => {
+    // let queryString = `INSERT INTO Photos SET ?`;
+    var query = {
+      text: 'INSERT INTO Photos(id, listing_id, photo_a, photo_b, photo_caption) VALUES($1, $2, $3, $4, $5)',
+      values: data
+    }
+    pool.query(query, (err, results) => {
       if (err) {
         reject(err);
+        console.log('1')
       }
+      console.log('1')
       resolve(results);
     });
   });
@@ -41,7 +47,7 @@ const insertDataSet = (data) => {
 const deleteDataSet = (listingId) => {
   return new Promise ((resolve, reject) => {
     let queryString = `DELETE FROM Photos WHERE ID = ${listingId}`;
-    client.query(queryString, (err, results) => {
+    pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
       }

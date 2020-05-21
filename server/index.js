@@ -67,8 +67,12 @@ app.delete('/deleteSet', (req, res) => {
 //post data set, insert data set into db
 app.post('/postListingSet', (req, res) => {
   let dataSet = req.body
-  console.log('dataSet', dataSet)
-  insertDataSet(dataSet)
+  //console.log('dataSet', dataSet)
+  var arrayOfKeys = [];
+  for (var key in dataSet) {
+    arrayOfKeys.push(dataSet[key])
+  }
+  insertDataSet(arrayOfKeys)
   .then((results) => {
     res.send(results);
     console.log('posted')
