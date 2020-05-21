@@ -105,7 +105,7 @@ const recPhotos = (listingId) => {
       }
       console.log('33')
       //console.log('dbresults', results)
-      resolve(results);
+      resolve(results.rows);
     });
   });
 };

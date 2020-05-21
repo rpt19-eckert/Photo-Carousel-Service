@@ -20,6 +20,10 @@ config:
     - duration: 10
       arrivalRate: 200
       name: 'stage 3'
+    - duration: 10
+      arrivalRate: 300
+      name: 'stage 4'
+
 
 scenarios:
   - flow:
