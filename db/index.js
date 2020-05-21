@@ -1,15 +1,19 @@
-const mysql = require('mysql');
+const Pool = require('pg').Pool;
 
-const db = mysql.createConnection({
-  user: 'root',
-  password: '',
+const pool = new Pool({
+  user: 'yingwenchen',
+  host: 'localhost',
   database: 'photo_gallery',
-});
+  port: 5432
+})
 
-const getMainRouteString = (id) => {
+console.log('runs db file')
+
+const getMainRouteString = (listingId) => {
+  console.log('listingId', listingId)
   return new Promise((resolve, reject) => {
-    let select_query_name = `SELECT * FROM Photos WHERE name='${id}'`;
-    db.query(select_query_name, (err, results) => {
+    let queryString = `SELECT * FROM Photos WHERE listingId='${listingId}'`;
+    pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
       }
@@ -17,23 +21,71 @@ const getMainRouteString = (id) => {
     });
   });
 };
+//insert new set of Data into db
 
-const getMainRouteNum = (id) => {
+const insertDataSet = (data) => {
+
   return new Promise((resolve, reject) => {
-    let select_query_num = `SELECT * FROM Photos WHERE listing_id=${id}`;
-    db.query(select_query_num, (err, results) => {
+    // let queryString = `INSERT INTO Photos SET ?`;
+    var query = {
+      text: 'INSERT INTO Photos(id, listing_id, photo_a, photo_b, photo_caption) VALUES($1, $2, $3, $4, $5)',
+      values: data
+    }
+    pool.query(query, (err, results) => {
+      if (err) {
+        reject(err);
+        console.log('1')
+      }
+      console.log('1')
+      resolve(results);
+    });
+  });
+}
+
+//Delete set of Data where id is...
+
+const deleteDataSet = (listingId) => {
+  return new Promise ((resolve, reject) => {
+    let queryString = `DELETE FROM Photos WHERE ID = ${listingId}`;
+    pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
       }
       resolve(results);
+    })
+  })
+}
+
+//update data set
+const updateDataSet = (listingId, item, newData) => {
+  return new Promise((resolve, reject) => {
+    let queryString = `UPDATE Photos SET ${item} = ${newData} WHERE listing_id=${listingId}`;
+    client.query(queryString, (err, results) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(results);
+    });
+  })
+}
+
+const getMainRouteNum = (listingId) => {
+  console.log('getMainRoute', listingId)
+  return new Promise((resolve, reject) => {
+    let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
+    pool.query(queryString, (err, results) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(results.rows);
     });
   });
 };
 
 const toggleFavorite = (id) => {
   return new Promise((resolve, reject) => {
-    let update_query = `UPDATE Photos SET is_favorite = 1 - is_favorite WHERE listing_id=${id}`;
-    db.query(update_query, (err, results) => {
+    let queryString = `UPDATE Listings SET is_favorite = TRUE WHERE listing_id=${id}`;
+    pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
       }
@@ -42,13 +94,17 @@ const toggleFavorite = (id) => {
   });
 };
 
-const recPhotos = (id) => {
+const recPhotos = (listingId) => {
   return new Promise((resolve, reject) => {
-    let select_query = `SELECT photo1_b, photo2_b, photo3_b, photo4_b, photo5_b, photo6_b, photo7_b, photo8_b, photo9_b, photo10_b, photo11_b, photo12_b, photo13_b, photo14_b, photo15_b, photo16_b, photo17_b, photo18_b, photo19_b, photo20_b, photo21_b, photo22_b, photo23_b, photo24_b, photo25_b, photo26_b, photo27_b, photo28_b, photo29_b, photo30_b FROM Photos WHERE listing_id=${id}`;
-    db.query(select_query, (err, results) => {
+    let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
+    pool.query(queryString, (err, results) => {
       if (err) {
+        console.log('22')
         reject(err);
+
       }
+      console.log('33')
+      //console.log('dbresults', results)
       resolve(results);
     });
   });
@@ -56,9 +112,12 @@ const recPhotos = (id) => {
 
 
 module.exports = {
-  db,
+  pool,
   getMainRouteString,
   getMainRouteNum,
   toggleFavorite,
-  recPhotos
+  recPhotos,
+  insertDataSet,
+  deleteDataSet,
+  updateDataSet
 };
