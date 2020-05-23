@@ -21,20 +21,22 @@ config:
       arrivalRate: 200
       name: 'stage 3'
     - duration: 10
-      arrivalRate: 300
+      arrivalRate: 400
       name: 'stage 4'
+    - duration: 10
+      arrivalRate: 600
+      name: 'stage 5'
+    - duration: 10
+      arrivalRate: 900
+      name: 'stage 5'
+  processor: "./artilleryHelpFunc.js"
 
 
 scenarios:
   - flow:
-    - loop:
-      - get:
-          url: "/{{ $loopElement }}/rec-Photos"
-      over:
-        - "335345"
-        - "345566"
-        - "3256677"
-        - "9944356"
-        - "9569496"
+    - function: "generateRandomListingId"
+    - get:
+        url: "/{{ listingId }}/rec-Photos"
+
 
 

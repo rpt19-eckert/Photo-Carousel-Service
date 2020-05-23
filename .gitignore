@@ -5,3 +5,5 @@ exampleDataTwo.json
 newrelic.js
 newrelic_agent.log
 loadTestData.csv
+reportREDIS.json
+reportREDIS.json.html

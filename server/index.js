@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+///////////////////////////////////////////////
 //cache middleware
 let cache = function (req, res, next) {
   let id = req.query.listingId;
@@ -40,8 +41,9 @@ let cache = function (req, res, next) {
     }
   })
 }
+
 // cache middleware for '/:id/rec-photos'
-let cacheTwo = function (req, res, next) {
+let cacheQueryEndpoint = function (req, res, next) {
   let id = req.path.split('/')[1];
   if (id === 'rec-photos') {
     id = 10001;
@@ -60,8 +62,9 @@ let cacheTwo = function (req, res, next) {
     }
   })
 }
+/////////////////////////////////////////////////////////
 //routing for recommendation service
-app.get('/:id/rec-photos', cacheTwo, (req, res, next) => {
+app.get('/:id/rec-photos', cacheQueryEndpoint, (req, res, next) => {
   let id = req.path.split('/')[1];
   if (id === 'rec-photos') {
     id = 10001;
@@ -73,7 +76,7 @@ app.get('/:id/rec-photos', cacheTwo, (req, res, next) => {
     //console.log('fetching from db', results)
     var stringifyResults = JSON.stringify(results);
     client.setex(id, 1800, stringifyResults);
-    console.log('fetching from db', stringifyResults)
+    // console.log('fetching from db', stringifyResults)
    //console.log('results', results)
     res.end(stringifyResults);
 
