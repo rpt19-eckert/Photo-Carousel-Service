@@ -32,11 +32,12 @@ let cache = function (req, res, next) {
       console.log('errrrr')
       throw err;
     }
-    if (data !== null) {
+    if (data != null || data != undefined) {
+      console.log('cache', id)
       data =  JSON.parse(data)
       res.send(JSON.stringify(data))
     } else {
-      console.log('next')
+      console.log('next', id)
       next()
     }
   })
@@ -50,14 +51,16 @@ let cacheQueryEndpoint = function (req, res, next) {
   }
   client.get(id, (err, data) => {
     if (err) {
+
       console.log('errrrr')
       throw err;
     }
     if (data !== null) {
+      console.log('cache', id)
       data =  JSON.parse(data);
       res.send(JSON.stringify(data));
     } else {
-      console.log('next')
+      console.log('next', id)
       next()
     }
   })

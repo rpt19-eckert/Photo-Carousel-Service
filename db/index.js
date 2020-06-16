@@ -103,7 +103,7 @@ const recPhotos = (listingId) => {
         reject(err);
 
       }
-      console.log('33')
+      console.log('44')
       //console.log('dbresults', results)
       resolve(results.rows);
     });
