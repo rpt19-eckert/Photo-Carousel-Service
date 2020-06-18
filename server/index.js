@@ -1,24 +1,42 @@
-const nr = require('newrelic');
+//const nr = require('newrelic');
 const express = require('express');
 const redis = require('redis');
 const bodyParser = require('body-parser');
+const expressStaticGzip = require('express-static-gzip');
+const compression = require('compression');
+const morgan = require('morgan')
+const fs = require('fs')
+const router = express.Router();
+
 
 const app = express();
 const port = process.env.PORT || 3002;
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 const { pool, getMainRouteNum, getMainRouteString, toggleFavorite, recPhotos, insertDataSet, deleteDataSet, updateDataSet } = require('../db/index.js');
 
-const fullPath = '/Users/jasonjacob/Desktop/seniorProjects/rpt19-front-end-capstone/jason_FEC_service/public/index.html';
+const fullPath = '/home/ubuntu/Ying_Service_Photos/public/index.html';
 
 const client = redis.createClient(REDIS_PORT);
+app.use(morgan('dev'))
+
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
-app.use(express.static(__dirname + '/../public'));
+app.use(compression());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+
+app.use('/', expressStaticGzip(__dirname + '/../public', {
+  enableBrotli: true,
+   orderPreference: ['br', 'gz'],
+   setHeaders: function (res, path) {
+      res.setHeader("Cache-Control", "public, max-age=31536000");
+  }}));
+ //app.use(express.static(__dirname + '/../public'));
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
@@ -108,7 +126,7 @@ app.get('/:id/listingInfo', (req, res, next) => {
   .then((results) => {
    console.log('fetching from db')
     var stringifyResults = JSON.stringify(results.rows);
-    console.log('stringidyResults', stringifyResults)
+    //console.log('stringidyResults', stringifyResults)
     client.setex(id, 1800, stringifyResults);
 
    //console.log('results', results)
@@ -116,7 +134,7 @@ app.get('/:id/listingInfo', (req, res, next) => {
 
   })
   .catch((err) => {
-    console.log('3')
+   // console.log('3')
     console.log('error', err);
   });
 });
@@ -199,9 +217,9 @@ app.get('/listing-info', cache, (req, res, next) => {
     id = Number(id);
     getMainRouteNum(id)
     .then((results) => {
-      console.log('results in server', results)
+      //console.log('results in server', results)
       var stringifyResults = JSON.stringify(results);
-      console.log('stringidyResults', stringifyResults)
+      //console.log('stringidyResults', stringifyResults)
       client.setex(id, 1800, stringifyResults);
 
      //console.log('results', results)
@@ -214,7 +232,19 @@ app.get('/listing-info', cache, (req, res, next) => {
 });
 
 // reload page with product identifier in url
-app.use('/:id', express.static(__dirname + '/../public/index.html'));
+// app.use('/:id', express.static(__dirname + '/../public/index.html'));
+
+app.get('/:id', (req, res) => {
+  // console.log('hit here', __dirname)
+   //res.render(fullPath)
+   fs.readFile(fullPath, 'utf8', (err, results) => {
+     if (err) {
+       console.log(err);
+     } else {
+       res.end(results);
+     }
+   })
+ })
 
 app.patch('/favorite', (req, res) => {
   let id = req.body.listingId;
@@ -228,4 +258,4 @@ app.patch('/favorite', (req, res) => {
   });
 });
 
-module.exports = app;
+//module.exports = app;

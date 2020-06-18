@@ -1,3 +1,5 @@
+const BrotliPlugin = require('brotli-webpack-plugin')
+
 module.exports = {
   entry: __dirname + '/public/PhotoService.jsx',
   module: {
@@ -25,4 +27,13 @@ module.exports = {
    filename: 'bundle.js',
    path: __dirname + '/public'
   },
+  plugins: [
+
+		new BrotliPlugin({
+			asset: '[path].br[query]',
+			test: /\.(js|css|html|svg)$/,
+			threshold: 10240,
+			minRatio: 0.8
+		})
+	]
 };

@@ -6,4 +6,5 @@ newrelic.js
 newrelic_agent.log
 loadTestData.csv
 reportREDIS.json
-reportREDIS.json.html
+reportREDIS.json.html,
+bundle.js.br
