@@ -55,7 +55,7 @@ let cacheQueryEndpoint = function (req, res, next) {
       console.log('errrrr')
       throw err;
     }
-    if (data !== null) {
+    if (data != null || data != undefined) {
       console.log('cache', id)
       data =  JSON.parse(data);
       res.send(JSON.stringify(data));
