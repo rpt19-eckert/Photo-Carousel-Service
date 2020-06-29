@@ -14,8 +14,8 @@ const port = process.env.PORT || 3002;
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 const { pool, getMainRouteNum, getMainRouteString, toggleFavorite, recPhotos, insertDataSet, deleteDataSet, updateDataSet } = require('../db/index.js');
 
-const fullPath = '/home/ubuntu/Ying_Service_Photos/public/index.html';
-
+//const fullPath = '/home/ubuntu/Ying_Service_Photos/public/index.html';
+const fullPath = '/Users/yingwenchen/Desktop/HR project/HR_RPT/SDC/jason_FEC_service/public/index.html'
 const client = redis.createClient(REDIS_PORT);
 app.use(morgan('dev'))
 
