@@ -8,7 +8,7 @@
 1. [Copyright and License](#Copyright-and-License)
 
 ## Overview
-The Photo Carousel Module is a inherited service from team member to apply back-end system design.
+The Photo Carousel Module is a inherited service from team member. I worked on back-end system design of the service.
 This Photo Carousel's back-end was designed and written together with three other services to create an Item Listing Page within a team of 3 people.
 
 ### My contributions:
