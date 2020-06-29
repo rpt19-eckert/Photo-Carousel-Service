@@ -36,16 +36,14 @@ This Photo Carousel's back-end was designed and written together with three othe
 ### npm install
   Install the dependencies in a local node_modules folder
 
-### npm run seed-db
-  Seed the database
 
 ### npm run react-dev
   Builds the app for production to the build folder.
   It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### npm run start
+### npm run server-dev
   Runs the app in the development mode.
-  Open http://localhost:3001 to view it in the browser.
+  Open http://localhost:3002 to view it in the browser.
 
 
 ## Tech Stack
