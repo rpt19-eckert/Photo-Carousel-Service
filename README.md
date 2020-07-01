@@ -1,4 +1,7 @@
-# Project: System Design Capstone
+# Project: Photo Carousel Service
+
+
+![Alt Text](https://media.giphy.com/media/RkEN4OkQaoILgOctnV/giphy.gif)
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -8,11 +11,11 @@
 1. [Copyright and License](#Copyright-and-License)
 
 ## Overview
-The Photo Carousel Module is a inherited service from team member. I worked on back-end system design of the service.
+The Photo Carousel Module is a inherited service with legacy deo. I worked on back-end system design of the service.
 This Photo Carousel's back-end was designed and written together with two other services to create an Item Listing Page within a team of 3 people.
 
 ### My contributions:
-
+* Achieved improvement on performance from 200 rps to 2000 rps.
 * Horizontal and Vertical Scaling Photo Carousel Service Module.
 * Coordinated and deployed entire team’s modules on proxy server EC2 instance.
 * Utilized agile workflow practices on a 3 - person remote team.
@@ -51,9 +54,8 @@ This Photo Carousel's back-end was designed and written together with two other 
 - JavaScript
 - React
 - Node/Express
-- POSTGRES
+- PostgreSQL
 - Artillery
-- Loader io
 - New Relic
 - Redis
 - NGINX
