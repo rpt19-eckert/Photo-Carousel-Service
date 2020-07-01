@@ -1,7 +1,7 @@
 # Project: Photo Carousel Service
 
 
-![Alt Text](https://gph.is/g/Zd17gz0)
+![Alt Text](https://media.giphy.com/media/VGJFc4U3g8Ae7s5xhk/giphy.gif)
 
 
 ## Table of Contents
