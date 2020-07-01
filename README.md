@@ -50,6 +50,9 @@ This Photo Carousel's back-end was designed and written together with two other 
   Open http://localhost:3002 to view it in the browser.
 
 
+
+![Alt Text](https://media.giphy.com/media/RlexEO39uVnLGJ1tt8/giphy.gif)
+
 ## Tech Stack
 
 - JavaScript
