@@ -70,7 +70,7 @@ app.delete("/deleteSet", (req, res) => {
 //post data set, insert data set into db
 app.post("/postListingSet", (req, res) => {
   let dataSet = req.body;
-  var arrayOfKeys = [];
+  let arrayOfKeys = [];
   for (let key in dataSet) {
     arrayOfKeys.push(dataSet[key]);
   }
