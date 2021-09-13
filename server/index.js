@@ -1,144 +1,141 @@
-const nr = require('newrelic');
-const express = require('express');
+require("dotenv").config();
+const nr = require("newrelic");
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = 3002;
-const bodyParser = require('body-parser');
-const { pool, getMainRouteNum, getMainRouteString, toggleFavorite, recPhotos, insertDataSet, deleteDataSet, updateDataSet } = require('../db/index.js');
+const port = process.env.PORT || 3002;
+const {
+  pool,
+  getMainRouteNum,
+  getMainRouteString,
+  toggleFavorite,
+  recPhotos,
+  insertDataSet,
+  deleteDataSet,
+  updateDataSet,
+} = require("../db/index.js");
 
-const fullPath = '/Users/jasonjacob/Desktop/seniorProjects/rpt19-front-end-capstone/jason_FEC_service/public/index.html';
+app.use(express.static(__dirname + "/../public"));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-app.use(express.static(__dirname + '/../public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 //routing for recommendation service
-app.get('/:id/rec-photos', (req, res) => {
-  let id = req.path.split('/')[1];
-  if (id === 'rec-photos') {
+app.get("/:id/rec-photos", (req, res) => {
+  let id = req.path.split("/")[1];
+  if (id === "rec-photos") {
     id = 10001;
   }
   recPhotos(id)
-  .then((results) => {
-
-    res.send(results.rows);
-  })
-  .catch((err) => {
-    console.log('3')
-    console.log('error', err);
-  });
+    .then((results) => {
+      res.status(200).json(results.rows);
+    })
+    .catch((err) => {
+      console.log("error", err);
+      res.status(500).json({ error: "Error fetching photos" });
+    });
 });
-app.get('/:id/listingInfo', (req, res) => {
-  let id = req.path.split('/')[1];
-  if (id === 'rec-photos') {
+app.get("/:id/listingInfo", (req, res) => {
+  let id = req.path.split("/")[1];
+  if (id === "rec-photos") {
     id = 10001;
   }
   recPhotos(id)
-  .then((results) => {
-
-    res.send(results.rows);
-  })
-  .catch((err) => {
-    console.log('3')
-    console.log('error', err);
-  });
+    .then((results) => {
+      res.send(results.rows);
+    })
+    .catch((err) => {
+      console.log("error", err);
+      res.status(500).json({ error: "Error listing information" });
+    });
 });
 
 //delete a set where id = req.body.id
-app.delete('/deleteSet', (req, res) => {
+app.delete("/deleteSet", (req, res) => {
   let id = req.body.listingId;
-  console.log('id', id)
+
   deleteDataSet(id)
-  .then((results) => {
-    res.send(results);
-    console.log('data deleted')
-  })
-  .catch((err) => {
-    console.log('error', err);
-  });
-});
-
-//post data set, insert data set into db
-app.post('/postListingSet', (req, res) => {
-  let dataSet = req.body
-  //console.log('dataSet', dataSet)
-  var arrayOfKeys = [];
-  for (var key in dataSet) {
-    arrayOfKeys.push(dataSet[key])
-  }
-  insertDataSet(arrayOfKeys)
-  .then((results) => {
-    res.send(results);
-    console.log('posted')
-  })
-  .catch((err) => {
-    console.log('error', err);
-  });
-})
-
-//update data set
-app.put('/updatePhotoFromId', (req, res) => {
-   let id = req.body.listingId;
-   let item = req.body.item;
-   let newPhoto = req.body.photoUrl;
-   updateDataSet(id, item, newPhoto)
-   .then((results) => {
-    res.send(results);
-    console.log('updated')
-  })
-  .catch((err) => {
-    console.log('err', err);
-  });
-})
-
-
-//get product by unique identifier using req object query property.
-app.get('/listing-info', (req, res) => {
-  let id = req.query.listingId;
-  console.log('id', id)
-  if (isNaN(Number(id))) {
-    //identifier is name
-    getMainRouteString(id)
     .then((results) => {
-     // console.log('results', results)
       res.send(results);
     })
     .catch((err) => {
-      console.log('err', err);
+      console.log("error", err);
     });
+});
+
+//post data set, insert data set into db
+app.post("/postListingSet", (req, res) => {
+  let dataSet = req.body;
+  var arrayOfKeys = [];
+  for (var key in dataSet) {
+    arrayOfKeys.push(dataSet[key]);
+  }
+  insertDataSet(arrayOfKeys)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log("error", err);
+    });
+});
+
+//update data set
+app.put("/updatePhotoFromId", (req, res) => {
+  let id = req.body.listingId;
+  let item = req.body.item;
+  let newPhoto = req.body.photoUrl;
+  updateDataSet(id, item, newPhoto)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log("err", err);
+    });
+});
+
+//get product by unique identifier using req object query property.
+app.get("/listing-info", (req, res) => {
+  let id = req.query.listingId;
+  if (isNaN(Number(id))) {
+    //identifier is name
+    getMainRouteString(id)
+      .then((results) => {
+        res.status(200).json(results);
+      })
+      .catch((err) => {
+        console.log("err", err);
+        res.status(500).json({ error: "Error listing information" });
+      });
   } else {
     //identifier is lisitng_id
     id = Number(id);
     getMainRouteNum(id)
-    .then((results) => {
-     //console.log('results', results)
-      res.send(results);
-    })
-    .catch((err) => {
-      console.log('error', err);
-    });
+      .then((results) => {
+        //console.log('results', results)
+        res.send(results);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   }
 });
 
 // reload page with product identifier in url
-app.use('/:id', express.static(__dirname + '/../public/index.html'));
+app.use("/:id", express.static(__dirname + "/../public/index.html"));
 
-app.patch('/favorite', (req, res) => {
+app.patch("/favorite", (req, res) => {
   let id = req.body.listingId;
-  console.log('id', id)
   toggleFavorite(id)
-  .then((results) => {
-    res.send(results);
-  })
-  .catch((err) => {
-    console.log('error', err);
-  });
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log("error", err);
+    });
 });
 
 module.exports = app;
