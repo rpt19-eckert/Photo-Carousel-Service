@@ -1,16 +1,15 @@
-const Pool = require('pg').Pool;
+require("dotenv").config();
+const Pool = require("pg").Pool;
 
 const pool = new Pool({
-  user: 'yingwenchen',
-  host: 'localhost',
-  database: 'photo_gallery',
-  port: 5432
-})
-
-console.log('runs db file')
+  user: process.env.USER,
+  host: "localhost",
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+});
 
 const getMainRouteString = (listingId) => {
-  console.log('listingId', listingId)
+  console.log("listingId", listingId);
   return new Promise((resolve, reject) => {
     let queryString = `SELECT * FROM Photos WHERE listingId='${listingId}'`;
     pool.query(queryString, (err, results) => {
@@ -24,37 +23,34 @@ const getMainRouteString = (listingId) => {
 //insert new set of Data into db
 
 const insertDataSet = (data) => {
-
   return new Promise((resolve, reject) => {
     // let queryString = `INSERT INTO Photos SET ?`;
     var query = {
-      text: 'INSERT INTO Photos(id, listing_id, photo_a, photo_b, photo_caption) VALUES($1, $2, $3, $4, $5)',
-      values: data
-    }
+      text: "INSERT INTO Photos(id, listing_id, photo_a, photo_b, photo_caption) VALUES($1, $2, $3, $4, $5)",
+      values: data,
+    };
     pool.query(query, (err, results) => {
       if (err) {
         reject(err);
-        console.log('1')
       }
-      console.log('1')
       resolve(results);
     });
   });
-}
+};
 
 //Delete set of Data where id is...
 
 const deleteDataSet = (listingId) => {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     let queryString = `DELETE FROM Photos WHERE ID = ${listingId}`;
     pool.query(queryString, (err, results) => {
       if (err) {
         reject(err);
       }
       resolve(results);
-    })
-  })
-}
+    });
+  });
+};
 
 //update data set
 const updateDataSet = (listingId, item, newData) => {
@@ -66,11 +62,11 @@ const updateDataSet = (listingId, item, newData) => {
       }
       resolve(results);
     });
-  })
-}
+  });
+};
 
 const getMainRouteNum = (listingId) => {
-  console.log('getMainRoute', listingId)
+  console.log("getMainRoute", listingId);
   return new Promise((resolve, reject) => {
     let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
     pool.query(queryString, (err, results) => {
@@ -99,17 +95,12 @@ const recPhotos = (listingId) => {
     let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
     pool.query(queryString, (err, results) => {
       if (err) {
-        console.log('22')
         reject(err);
-
       }
-      console.log('33')
-      //console.log('dbresults', results)
       resolve(results);
     });
   });
 };
-
 
 module.exports = {
   pool,
@@ -119,5 +110,5 @@ module.exports = {
   recPhotos,
   insertDataSet,
   deleteDataSet,
-  updateDataSet
+  updateDataSet,
 };
