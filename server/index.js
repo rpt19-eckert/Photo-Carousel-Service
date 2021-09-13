@@ -71,7 +71,7 @@ app.delete("/deleteSet", (req, res) => {
 app.post("/postListingSet", (req, res) => {
   let dataSet = req.body;
   var arrayOfKeys = [];
-  for (var key in dataSet) {
+  for (let key in dataSet) {
     arrayOfKeys.push(dataSet[key]);
   }
   insertDataSet(arrayOfKeys)
