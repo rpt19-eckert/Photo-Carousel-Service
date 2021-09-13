@@ -5,7 +5,6 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3002;
 const {
-  pool,
   getMainRouteNum,
   getMainRouteString,
   toggleFavorite,
