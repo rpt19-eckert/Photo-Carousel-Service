@@ -38,7 +38,7 @@ app.get("/:id/rec-photos", (req, res) => {
       res.status(500).json({ error: "Error fetching photos" });
     });
 });
-app.get("/:id/listingInfo", (req, res) => {
+app.get("/listingInfo/:id", (req, res) => {
   let id = req.path.split("/")[1];
   if (id === "rec-photos") {
     id = 10001;
@@ -97,10 +97,9 @@ app.put("/updatePhotoFromId", (req, res) => {
 });
 
 //get product by unique identifier using req object query property.
-app.get("/listing-info", (req, res) => {
-  let id = req.query.listingId;
+app.get("/listing-info/:id", (req, res) => {
+  let id = req.params;
   if (isNaN(Number(id))) {
-    //identifier is name
     getMainRouteString(id)
       .then((results) => {
         res.status(200).json(results);
@@ -114,7 +113,6 @@ app.get("/listing-info", (req, res) => {
     id = Number(id);
     getMainRouteNum(id)
       .then((results) => {
-        //console.log('results', results)
         res.send(results);
       })
       .catch((err) => {
@@ -126,8 +124,8 @@ app.get("/listing-info", (req, res) => {
 // reload page with product identifier in url
 app.use("/:id", express.static(__dirname + "/../public/index.html"));
 
-app.patch("/favorite", (req, res) => {
-  let id = req.body.listingId;
+app.patch("/favorite/:id", (req, res) => {
+  let id = req.params;
   toggleFavorite(id)
     .then((results) => {
       res.send(results);
