@@ -193,16 +193,12 @@ class PhotoService extends React.Component {
       })
       .then((data) => {
         const formattedResult = this.formatIncomingData(data);
+        let { photo1_b, photo2_b, photo3_b, photo4_b } = formattedResult[0];
         let numOfPhotos = data.length;
         this.setState(() => ({
           currentListing: formattedResult[0],
           currentPhotoUrl: formattedResult[0].photo1_a,
-          nextPrevImages: [
-            formattedResult[0].photo1_b,
-            formattedResult[0].photo2_b,
-            formattedResult[0].photo3_b,
-            formattedResult[0].photo4_b,
-          ],
+          nextPrevImages: [photo1_b, photo2_b, photo3_b, photo4_b],
           numOfCurrentListingPhotos: numOfPhotos,
           currentPhotoCaption: formattedResult[0].photo1_caption,
         }));
@@ -271,18 +267,14 @@ class PhotoService extends React.Component {
 
   handleExit(e) {
     e.preventDefault();
+    let { photo1_b, photo2_b, photo3_b, photo4_b } = this.state.currentListing;
     this.setState({
       carousel: Empty,
       photoGallery: PhotoGallery,
       currentPhotoUrl: this.state.currentListing.photo1_a,
       currentPhotoCaption: this.state.currentListing.photo1_caption,
       currentPhotoIndexInListing: 1,
-      nextPrevImages: [
-        this.state.currentListing.photo1_b,
-        this.state.currentListing.photo2_b,
-        this.state.currentListing.photo3_b,
-        this.state.currentListing.photo4_b,
-      ],
+      nextPrevImages: [photo1_b, photo2_b, photo3_b, photo4_b],
     });
   }
 
@@ -404,6 +396,7 @@ class PhotoService extends React.Component {
 
   handlePhotoClick(e) {
     e.preventDefault();
+    let { photo2_b, photo3_b, photo4_b, photo5_b } = this.state.currentListing;
     let url = e.target.src;
     let id = Number(e.target.id.split("").pop());
     if (id < 5) {
@@ -429,12 +422,7 @@ class PhotoService extends React.Component {
       });
     } else if (id === 5) {
       this.setState({
-        nextPrevImages: [
-          this.state.currentListing.photo2_b,
-          this.state.currentListing.photo3_b,
-          this.state.currentListing.photo4_b,
-          this.state.currentListing.photo5_b,
-        ],
+        nextPrevImages: [photo2_b, photo3_b, photo4_b, photo5_b],
         carousel: Carousel,
         currentPhotoUrl: url,
         currentPhotoIndexInListing: id,
