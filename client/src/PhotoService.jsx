@@ -158,9 +158,9 @@ class PhotoService extends React.Component {
   }
 
   dupGetNumOfListingPhotos(listing) {
-    let dupPhotosArray = Object.keys(listing).slice(4, -3);
-    let dupListingSmallUrls = [];
-    let count = 0;
+    const dupPhotosArray = Object.keys(listing).slice(4, -3);
+    const dupListingSmallUrls = [];
+    const count = 0;
     for (let key of dupPhotosArray) {
       if (listing[key]) {
         if (key.split("").slice(-1) == "b") {
@@ -173,8 +173,8 @@ class PhotoService extends React.Component {
   }
 
   componentDidMount() {
-    let url = window.location.href;
-    let id = url.split("/").pop();
+    const url = window.location.href;
+    const id = url.split("/").pop();
     if (isNaN(Number(id))) {
       if (listingNames.indexOf(id) === -1) {
         id = listingNames[1];
@@ -193,8 +193,8 @@ class PhotoService extends React.Component {
       })
       .then((data) => {
         const formattedResult = this.formatIncomingData(data);
-        let { photo1_b, photo2_b, photo3_b, photo4_b } = formattedResult[0];
-        let numOfPhotos = data.length;
+        const { photo1_b, photo2_b, photo3_b, photo4_b } = formattedResult[0];
+        const numOfPhotos = data.length;
         this.setState(() => ({
           currentListing: formattedResult[0],
           currentPhotoUrl: formattedResult[0].photo1_a,
@@ -208,11 +208,11 @@ class PhotoService extends React.Component {
 
   handleNextPrevClick(e) {
     e.preventDefault();
-    let photoNumber = this.state.currentPhotoIndexInListing;
-    let max = this.state.numOfCurrentListingPhotos;
-    let id = Number(e.target.id);
-    let $rightButton = $("#carouselRightButton")[0];
-    let $leftButton = $("#carouselLeftButton")[0];
+    const photoNumber = this.state.currentPhotoIndexInListing;
+    const max = this.state.numOfCurrentListingPhotos;
+    const id = Number(e.target.id);
+    const $rightButton = $("#carouselRightButton")[0];
+    const $leftButton = $("#carouselLeftButton")[0];
     if (photoNumber === 1) {
       if (id === 1) {
         $rightButton.click();
@@ -267,12 +267,15 @@ class PhotoService extends React.Component {
 
   handleExit(e) {
     e.preventDefault();
+    const currentPhotoUrl = this.state.currentListing.photo1_a;
+    const currentPhotoCaption = this.state.currentListing.photo1_caption;
+
     let { photo1_b, photo2_b, photo3_b, photo4_b } = this.state.currentListing;
     this.setState({
       carousel: Empty,
       photoGallery: PhotoGallery,
-      currentPhotoUrl: this.state.currentListing.photo1_a,
-      currentPhotoCaption: this.state.currentListing.photo1_caption,
+      currentPhotoUrl: currentPhotoUrl,
+      currentPhotoCaption: currentPhotoCaption,
       currentPhotoIndexInListing: 1,
       nextPrevImages: [photo1_b, photo2_b, photo3_b, photo4_b],
     });
@@ -281,16 +284,14 @@ class PhotoService extends React.Component {
   handleLeftClick(e) {
     e.preventDefault();
 
-    let photoNumber = this.state.currentPhotoIndexInListing;
-    let max = this.state.numOfCurrentListingPhotos;
+    const photoNumber = this.state.currentPhotoIndexInListing;
+    const max = this.state.numOfCurrentListingPhotos;
+    const currentListing = this.state.currentListing;
     if (photoNumber !== 1) {
       this.setState({
-        currentPhotoUrl: this.state.currentListing[`photo${photoNumber - 1}_a`],
-        currentPhotoIndexInListing: --this.state.currentPhotoIndexInListing,
-        currentPhotoCaption:
-          this.state.currentListing[
-            `photo${this.state.currentPhotoIndexInListing}_caption`
-          ],
+        currentPhotoUrl: photoNumber[`photo${photoNumber - 1}_a`],
+        currentPhotoIndexInListing: photoNumber--,
+        currentPhotoCaption: currentListing[`photo${photoNumber}_caption`],
       });
     }
     if (photoNumber === max) {
@@ -301,10 +302,10 @@ class PhotoService extends React.Component {
     } else if (photoNumber < max && photoNumber - 3 >= 1) {
       this.setState({
         nextPrevImages: [
-          this.state.currentListing[`photo${photoNumber - 3}_b`],
-          this.state.currentListing[`photo${photoNumber - 2}_b`],
-          this.state.currentListing[`photo${photoNumber - 1}_b`],
-          this.state.currentListing[`photo${photoNumber}_b`],
+          photoNumber[`photo${photoNumber - 3}_b`],
+          photoNumber[`photo${photoNumber - 2}_b`],
+          photoNumber[`photo${photoNumber - 1}_b`],
+          photoNumber[`photo${photoNumber}_b`],
         ],
         nextPrevBorders: ["none", "none", "2px solid #404040", "none"],
         nextPrevOpacities: ["70%", "70%", "100%", "70%"],
@@ -341,25 +342,24 @@ class PhotoService extends React.Component {
 
   handleRightClick(e) {
     e.preventDefault();
-    let photoNumber = this.state.currentPhotoIndexInListing;
-    let max = this.state.numOfCurrentListingPhotos;
+    const photoNumber = this.state.currentPhotoIndexInListing;
+    const max = this.state.numOfCurrentListingPhotos;
+    const currentListing = this.state.currentListing;
+    const photoUrl = this.state.currentListing[`photo${photoNumber + 1}_a`];
     if (photoNumber !== max) {
       this.setState({
-        currentPhotoUrl: this.state.currentListing[`photo${photoNumber + 1}_a`],
-        currentPhotoIndexInListing: ++this.state.currentPhotoIndexInListing,
-        currentPhotoCaption:
-          this.state.currentListing[
-            `photo${this.state.currentPhotoIndexInListing}_caption`
-          ],
+        currentPhotoUrl: photoUrl,
+        currentPhotoIndexInListing: photoNumber++,
+        currentPhotoCaption: currentListing[`photo${photoNumber}_caption`],
       });
     }
     if (photoNumber > 1 && photoNumber + 3 <= max) {
       this.setState({
         nextPrevImages: [
-          this.state.currentListing[`photo${photoNumber}_b`],
-          this.state.currentListing[`photo${photoNumber + 1}_b`],
-          this.state.currentListing[`photo${photoNumber + 2}_b`],
-          this.state.currentListing[`photo${photoNumber + 3}_b`],
+          currentListing[`photo${photoNumber}_b`],
+          currentListing[`photo${photoNumber + 1}_b`],
+          currentListing[`photo${photoNumber + 2}_b`],
+          currentListing[`photo${photoNumber + 3}_b`],
         ],
         nextPrevBorders: ["none", "2px solid #404040", "none", "none"],
         nextPrevOpacities: ["70%", "100%", "70%", "70%"],
@@ -396,15 +396,17 @@ class PhotoService extends React.Component {
 
   handlePhotoClick(e) {
     e.preventDefault();
-    let { photo2_b, photo3_b, photo4_b, photo5_b } = this.state.currentListing;
-    let url = e.target.src;
-    let id = Number(e.target.id.split("").pop());
+    const { photo2_b, photo3_b, photo4_b, photo5_b } =
+      this.state.currentListing;
+    const url = e.target.src;
+    const id = Number(e.target.id.split("").pop());
+    const currentPhotoCaption = this.state.currentListing[`photo${id}_caption`];
     if (id < 5) {
       this.setState({
         carousel: Carousel,
         currentPhotoUrl: url,
         currentPhotoIndexInListing: id,
-        currentPhotoCaption: this.state.currentListing[`photo${id}_caption`],
+        currentPhotoCaption: currentPhotoCaption,
         nextPrevBorders: ["none", "none", "none", "none"].map((x, i) => {
           if (i === id - 1) {
             return "2px solid #404040";
@@ -426,7 +428,7 @@ class PhotoService extends React.Component {
         carousel: Carousel,
         currentPhotoUrl: url,
         currentPhotoIndexInListing: id,
-        currentPhotoCaption: this.state.currentListing[`photo${id}_caption`],
+        currentPhotoCaption: currentPhotoCaption,
         nextPrevBorders: ["none", "none", "none", "2px solid #404040"],
         nextPrevOpacities: ["70%", "70%", "70%", "100%"],
       });
