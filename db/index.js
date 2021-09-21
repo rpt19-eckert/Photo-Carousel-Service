@@ -8,8 +8,13 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
+/**
+ * Gets details for a listing
+ * @param {Number} listingId
+ * @returns {Promise->Array|Object}: promise which resolves to array of review data
+ */
+
 const getMainRouteString = (listingId) => {
-  console.log("listingId", listingId);
   return new Promise((resolve, reject) => {
     let queryString = `SELECT * FROM Photos WHERE listingId='${listingId}'`;
     pool.query(queryString, (err, results) => {
@@ -66,7 +71,6 @@ const updateDataSet = (listingId, item, newData) => {
 };
 
 const getMainRouteNum = (listingId) => {
-  console.log("getMainRoute", listingId);
   return new Promise((resolve, reject) => {
     let queryString = `SELECT * FROM photos WHERE listing_id=${listingId}`;
     pool.query(queryString, (err, results) => {
