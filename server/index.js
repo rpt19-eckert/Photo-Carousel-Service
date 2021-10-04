@@ -23,7 +23,7 @@ app.use(cors());
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-//routing for recommendation service
+// routing for recommendation service
 app.get("/:id/rec-photos", (req, res) => {
   let id = req.path.split("/")[1];
   if (id === "rec-photos") {
@@ -38,6 +38,8 @@ app.get("/:id/rec-photos", (req, res) => {
       res.status(500).json({ error: "Error fetching photos" });
     });
 });
+
+// Get listing information from db
 app.get("/listingInfo/:id", (req, res) => {
   let id = req.path.split("/")[1];
   if (id === "rec-photos") {
@@ -53,7 +55,7 @@ app.get("/listingInfo/:id", (req, res) => {
     });
 });
 
-//delete a set where id = req.body.id
+// delete a set where id = req.body.id
 app.delete("/deleteSet", (req, res) => {
   let id = req.body.listingId;
 
@@ -66,7 +68,7 @@ app.delete("/deleteSet", (req, res) => {
     });
 });
 
-//post data set, insert data set into db
+// post data set, insert data set into db
 app.post("/postListingSet", (req, res) => {
   let dataSet = req.body;
   let arrayOfKeys = [];
@@ -82,7 +84,7 @@ app.post("/postListingSet", (req, res) => {
     });
 });
 
-//update data set
+// update data set
 app.put("/updatePhotoFromId", (req, res) => {
   let id = req.body.listingId;
   let item = req.body.item;
@@ -96,7 +98,7 @@ app.put("/updatePhotoFromId", (req, res) => {
     });
 });
 
-//get product by unique identifier using req object query property.
+// get product by unique identifier using req object query property.
 app.get("/listing-info/:id", (req, res) => {
   let id = req.params;
   if (isNaN(Number(id))) {
@@ -109,7 +111,7 @@ app.get("/listing-info/:id", (req, res) => {
         res.status(500).json({ error: "Error listing information" });
       });
   } else {
-    //identifier is lisitng_id
+    // identifier is lisitng_id
     id = Number(id);
     getMainRouteNum(id)
       .then((results) => {

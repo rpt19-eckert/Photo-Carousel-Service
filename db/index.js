@@ -25,12 +25,15 @@ const getMainRouteString = (listingId) => {
     });
   });
 };
-//insert new set of Data into db
+/**
+ * Writes details for a listing
+ * @param {Number} data
+ * @returns {Promise->Array|Object}: promise which resolves to array of review data
+ */
 
 const insertDataSet = (data) => {
   return new Promise((resolve, reject) => {
-    // let queryString = `INSERT INTO Photos SET ?`;
-    var query = {
+    let query = {
       text: "INSERT INTO Photos(id, listing_id, photo_a, photo_b, photo_caption) VALUES($1, $2, $3, $4, $5)",
       values: data,
     };
@@ -43,7 +46,11 @@ const insertDataSet = (data) => {
   });
 };
 
-//Delete set of Data where id is...
+/**
+ * Delete details for a listing
+ * @param {Number} listingId
+ * @returns {Promise->Array|Object}: promise which resolves to array of review data
+ */
 
 const deleteDataSet = (listingId) => {
   return new Promise((resolve, reject) => {
@@ -57,7 +64,6 @@ const deleteDataSet = (listingId) => {
   });
 };
 
-//update data set
 const updateDataSet = (listingId, item, newData) => {
   return new Promise((resolve, reject) => {
     let queryString = `UPDATE Photos SET ${item} = ${newData} WHERE listing_id=${listingId}`;
