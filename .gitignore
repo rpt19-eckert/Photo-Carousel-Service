@@ -6,4 +6,4 @@ newrelic.js
 newrelic_agent.log
 loadTestData.csv
 .env
-client/src
+
